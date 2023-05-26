@@ -1,0 +1,31 @@
+{
+  "name": "throu-backend-nodejs",
+  "version": "1.0.0",
+  "description": "API RESTful bajo tecnologia nodejs de BitsDApps para el equipo de Throu",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Julio77/throu-backend-nodejs.git"
+  },
+  "author": "Julian Garcia para BitsDappS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Julio77/throu-backend-nodejs/issues"
+  },
+  "homepage": "https://github.com/Julio77/throu-backend-nodejs#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.18.2",
+    "express-rate-limit": "^5.5.1",
+    "jwt-simple": "^0.5.6",
+    "moment": "^2.29.4",
+    "mongoose": "^5.9.20"
+  }
+}

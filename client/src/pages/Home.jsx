@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 import { Navbar, Footer, Overlay } from "../components/landingPage";
-import { Cookies, Info } from "../components/landingPage/utility_components";
+import {
+  Cookies,
+  Info,
+  ScrollIndicator,
+} from "../components/landingPage/utility_components";
 import { useScrollLock } from "../hooks";
 import {
   Hero,
@@ -118,7 +122,7 @@ const Home = () => {
           scrollIndicator && "md:flex w-full items-center justify-center"
         }`}
       >
-        {/** <ScrollIndicator /> */}
+        <ScrollIndicator />
       </div>
       <div className="bg-gradient-to-t from-[#F7FAFF] to-transparent h-[100px] absolute top-[90vh] w-full md:block hidden" />
     </div>

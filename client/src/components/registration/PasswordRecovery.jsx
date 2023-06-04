@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Bg_logo1_left, Bg_logo2_right, PasswordKey } from "../../assets";
+import { Bg_Logo1_left, Bg_Logo2_right, PasswordKey } from "../../assets";
 import { Bg_logo1, Bg_logo2 } from "../../assets";
 
 const OtpInput = ({ index, onFocus, onBlur, focusedInput }) => {
@@ -351,7 +351,7 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
 
       <div className="absolute bottom-[-80px] left-0 md:block hidden z-0">
         <img
-          src={Bg_logo1_left}
+          src={Bg_Logo1_left}
           alt=""
           className="w-[10rem] h-[20rem] rotate-[-30deg]"
         />
@@ -359,7 +359,7 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
 
       <div className="absolute top-[-80px] right-0 md:block hidden z-0">
         <img
-          src={Bg_logo2_right}
+          src={Bg_Logo2_right}
           alt=""
           className="w-[10rem] h-[20rem] rotate-[-30deg]"
         />

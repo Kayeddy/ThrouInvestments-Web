@@ -85,8 +85,8 @@ import LandingBg2 from "./LandingBg2.jpg";
 
 import AboutUs_team from "./AboutUs_team.png";
 import AboutUs_team2 from "./AboutUs_team2.png";
-import Bg_logo1_left from "./Bg_logo1_left.png";
-import Bg_logo2_right from "./Bg_logo2_right.png";
+import Bg_Logo1_left from "./Bg_Logo1_left.png";
+import Bg_Logo2_right from "./Bg_Logo2_right.png";
 import Quotes from "./Quotes.png";
 import Team_member1 from "./Team_member1.png";
 import Team_member2 from "./Team_member2.png";
@@ -236,8 +236,8 @@ export {
   User_profile_icon,
   User_notifications_icon,
   AboutUs_team,
-  Bg_logo1_left,
-  Bg_logo2_right,
+  Bg_Logo1_left,
+  Bg_Logo2_right,
   Quotes,
   AboutUs_team2,
   Team_member1,

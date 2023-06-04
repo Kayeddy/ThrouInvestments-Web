@@ -21,6 +21,7 @@ module.exports = {
         "blue-custom": "0px 0px 50px rgba(24, 165, 255, 0.15)",
         "purple-custom": "0px 0px 20px rgba(140, 6, 177, 0.1)",
         "gray-custom": "0px 0px 50px rgba(28, 36, 75, 0.15)",
+        "project-section-custom": "0px 0px 50px rgba(132, 132, 132, 0.05);",
       },
     },
   },

@@ -39,9 +39,9 @@ const LogIn = ({ handleModal, handleSection }) => {
   };
 
   return (
-    <div className="md:bg-white h-full w-full md:w-full md:flex-1 relative flex flex-col justify-between md:px-8 md:py-4 p-4 overflow-hidden">
+    <div className="md:bg-white h-full w-full relative md:px-8 md:py-4 p-4 overflow-hidden">
       {/** Desktop version */}
-      <div className="md:flex hidden flex-col items-center justify-around h-full ">
+      <div className="md:flex hidden flex-col items-center justify-around h-full relative">
         <span
           className="material-symbols-outlined text-slate-400 w-full md:flex items-start justify-end cursor-pointer hidden absolute top-4 right-4"
           onClick={() => handleModal(false)}
@@ -49,7 +49,7 @@ const LogIn = ({ handleModal, handleSection }) => {
           cancel
         </span>
 
-        <div className="flex flex-col gap-2 w-full px-12 md:px-8 font-jakarta lg:pt-[5%] xl:pt-[10%]">
+        <div className="flex flex-col gap-2 w-full px-8 font-jakarta mt-[15%]">
           <div className="flex flex-col gap-8 items-center justify-center">
             <div
               className="relative w-full flex flex-row items-center"
@@ -97,14 +97,14 @@ const LogIn = ({ handleModal, handleSection }) => {
           </div>
 
           <p
-            className="underline hover:font-semibold hover:text-[#18A5FF] text-[16px] text-[#062147] cursor-pointer w-fit font-['sen']"
+            className="underline hover:font-semibold hover:text-[#18A5FF] text-[16px] text-[#062147] cursor-pointer w-fit font-['sen'] translate-y-[10px]"
             onClick={() => handleSection(5)}
           >
             Recuperar mi contraseña
           </p>
         </div>
 
-        <div className="w-full px-8 h-fit -translate-y-[30px]">
+        <div className="w-full px-8 h-fit">
           <button
             className="w-full text-[25px] font-bold bg-[#062147] py-2 text-white h-fit"
             onClick={handleSubmit}
@@ -113,7 +113,7 @@ const LogIn = ({ handleModal, handleSection }) => {
           </button>
         </div>
 
-        <p className="text-[16px] flex items-center gap-2 h-fit font-jakarta translate-y-[30px]">
+        <p className="text-[16px] flex items-center gap-2 h-fit font-jakarta translate-y-3">
           ¿Aún no tienes cuenta?{" "}
           <span
             className="inline underline font-normal cursor-pointer hover:text-[#18A5FF]"

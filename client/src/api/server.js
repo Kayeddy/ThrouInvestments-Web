@@ -3,7 +3,7 @@ import useStore from "../context/index";
 
 export const userConnection = () => {
   const { assignAccessToken, addUser: addUserProfile, assignAuth } = useStore();
-
+  // Tests ------------------------------------------------------------
   // Test method to connect to backend
   const connect = async () => {
     try {
@@ -26,6 +26,7 @@ export const userConnection = () => {
     }
   };
 
+  // User interaction --------------------------------------------------------
   // Method to add users to database
   const addUser = async (userData) => {
     try {
@@ -56,7 +57,7 @@ export const userConnection = () => {
         body: JSON.stringify(userData),
       });
       const data = await response.json();
-      console.log(data);
+      console.log(data[0]);
       assignAccessToken(data[0].token.toString());
       addUserProfile(data[0]);
       assignAuth({
@@ -110,10 +111,37 @@ export const userConnection = () => {
     }
   };
 
+  // Mail ---------------------------------------------------------------------------
+
   return {
     connect,
     addUser,
     logIn,
     getUser,
+  };
+};
+
+export const EmailHandler = () => {
+  // Method to send an email to a user
+  const sendEmail = async (emailData, token) => {
+    try {
+      const response = await fetch("http://207.246.75.81:3800/api/v1/mail/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(emailData),
+      });
+      const data = await response.text();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  return {
+    sendEmail,
   };
 };

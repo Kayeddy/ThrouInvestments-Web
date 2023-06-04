@@ -62,7 +62,7 @@ const Home = () => {
   }, [toggleRegistrationModal]);
 
   return (
-    <div className="relative h-fit">
+    <div className="relative min-h-screen">
       <div className="fixed top-0 z-20 w-full h-fit">
         <Navbar
           blur={navBlur}
@@ -70,7 +70,7 @@ const Home = () => {
         />
       </div>
 
-      <div className="md:absolute z-50">
+      <div className="md:absolute z-50 h-full">
         {toggleRegistrationModal && (
           <Overlay>
             <div className="w-full h-full text-black flex items-center justify-center z-50">
@@ -105,7 +105,7 @@ const Home = () => {
       </div>
 
       <div
-        className={`w-full h-fit mx-auto font-sen bg-[#F7FAFF] overflow-x-hidden scroll-smooth`}
+        className={`w-full h-full mx-auto font-sen bg-[#F7FAFF] overflow-x-hidden scroll-smooth flex flex-col items-center justify-between gap-16`}
       >
         <Hero />
         <Proposal />

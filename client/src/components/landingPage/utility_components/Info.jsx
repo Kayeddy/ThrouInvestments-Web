@@ -5,7 +5,7 @@ const info = () => {
   return (
     <div
       className="items-center justify-center p-4 fixed bottom-[20vh] right-[57px] bg-[#062147] lg:flex hidden z-10 hover:bg-[#18A5FF]
-    hover:cursor-pointer group hover:p-2"
+    hover:cursor-pointer group hover:p-2 transition ease transform duration-300"
     >
       <span className="text-white text-[25px] flex flex-row items-center justify-center gap-4">
         <span className="material-symbols-outlined text-white">

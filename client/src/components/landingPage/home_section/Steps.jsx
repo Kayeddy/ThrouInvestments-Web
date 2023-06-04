@@ -18,7 +18,7 @@ import { StepsCard } from "./utility_components";
 
 const Steps = () => {
   return (
-    <div className="flex flex-col w-full h-fit md:h-[800px] items-center mt-[100px] justify-start md:pl-[7%]  overflow-hidden">
+    <div className="flex flex-col w-full h-screen md:h-[620px] xl:h-[800px] items-center justify-start md:pl-[7%]  overflow-hidden">
       <div className="w-full h-full flex-col md:flex hidden items-start justify-start">
         <div className="flex flex-col justify-start items-start w-full h-fit pl-[10%] relative">
           <p className="text-left text-[#062147] font-bold leading-[50px] text-[40px]">

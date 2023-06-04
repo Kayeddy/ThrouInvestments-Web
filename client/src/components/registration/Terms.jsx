@@ -8,18 +8,18 @@ const Terms = ({ handleSection }) => {
   }, []);
 
   return (
-    <div className="w-full md:h-full h-[100vh] bg-white pt-20 md:pt-0">
-      <div className="container flex flex-col items-start justify-center gap-4 w-full md:h-fit h-full p-8">
+    <div className="w-full h-full bg-white pt-20 md:pt-0 overflow-hidden">
+      <div className="container flex flex-col items-start justify-center gap-4 w-full h-full p-8">
         <div className="flex flex-col items-start justify-start gap-4">
           <img src={Throu_l} alt="" className="w-[150px] h-[40px]" />
-          <p className=" font-['Sen'] md:text-[22px] text-[18px] font-semibold text-[#B5B5B5]">
+          <p className=" font-sen md:text-[22px] text-[18px] font-semibold text-[#B5B5B5]">
             Términos y Condiciones
           </p>
         </div>
 
         <div
           id="Terms-text"
-          className="overflow-y-auto modal-scrollable-content md:h-[400px] h-[90%]"
+          className="overflow-y-auto modal-scrollable-content md:min-h-[200px] md:h-full md:max-h-[400px] h-[90%]"
         >
           <p className="font-jakarta text-[18px] ">
             <span className="text-[22px] w-[65%] font-bold mb-[20px] block">

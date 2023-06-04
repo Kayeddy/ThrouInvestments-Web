@@ -46,11 +46,6 @@ const Navbar = ({ handleWalletModal }) => {
     });
   };
 
-  useEffect(() => {
-    setNavBlur(false);
-    handleNavBlur();
-  }, []);
-
   const changeTheme = handleThemeChange();
   const address = "";
   const genericHamburgerLine =
@@ -99,6 +94,18 @@ const Navbar = ({ handleWalletModal }) => {
         <p className="text-[#AA1010]">Cerrar sesion</p>
       </div>,
     ],
+    notifications: state.notifications
+      ? state.notifications.map((item) => (
+          <div
+            key={item.id}
+            className="flex flex-col justify-start items-start w-full h-fit p-2 gap-2 border-b-2"
+            onClick={() => navigate("/user_verification")}
+          >
+            <p className="font-sen font-semibold text-md">{item.title}</p>
+            <p className="font-jakarta font-normal text-sm">{item.message}</p>
+          </div>
+        ))
+      : [],
   };
 
   const navigationBarRef = useRef(null);
@@ -116,15 +123,6 @@ const Navbar = ({ handleWalletModal }) => {
     setToggleDrawer(false);
   };
 
-  useEffect(() => {
-    window.addEventListener("click", handleOutsideClick);
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("click", handleOutsideClick);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   const Icon = ({ imgUrl, handleClick }) => (
     <div
       className={`w-[15px] h-[15px] rounded-[10px] flex justify-center items-center cursor-pointer`}
@@ -137,6 +135,13 @@ const Navbar = ({ handleWalletModal }) => {
       />
     </div>
   );
+
+  useEffect(() => {
+    setNavBlur(false);
+    handleNavBlur();
+    window.removeEventListener("click", handleOutsideClick);
+    window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="flex flex-row justify-between gap-6 items-center dark:bg-[#01070E80] bg-[#F7FAFF80] backdrop-blur-xl w-full z-100 font-sen">
@@ -153,17 +158,19 @@ const Navbar = ({ handleWalletModal }) => {
         </div>
 
         <div className="flex justify-center items-center">
-          <div className=" w-full flex justify-center gap-12 items-center list-none">
+          <div className="w-full flex flex-row justify-start gap-12 items-center">
             <DropdownInput
               options={NavigationOptions.proyectos}
               switchTab={handleTabChange}
               style="hover:underline hover:text-[#18A5FF]"
             />
+
             <DropdownInput
               options={NavigationOptions.nostros}
               switchTab={handleTabChange}
               style="hover:underline hover:text-[#18A5FF]"
             />
+
             <DropdownInput
               options={NavigationOptions.aprende}
               switchTab={handleTabChange}
@@ -206,9 +213,20 @@ const Navbar = ({ handleWalletModal }) => {
             }
           />
 
-          <span className="material-symbols-outlined text-[#062147]">
-            Notifications
-          </span>
+          <div className="w-fit h-fit relative">
+            <DropdownInput
+              options={NavigationOptions.notifications}
+              switchTab={handleTabChange}
+              optionalTitle={
+                <span className="material-symbols-outlined text-[#062147]">
+                  Notifications
+                </span>
+              }
+            />
+            <span class="absolute top-[-2px] right-[-5px] h-4 w-4 flex items-center justify-center rounded-[50%] bg-[#18A5FF] text-white text-jakarta text-xs">
+              {state.notifications.length}
+            </span>
+          </div>
         </div>
       </div>
 

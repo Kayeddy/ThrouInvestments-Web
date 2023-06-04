@@ -117,7 +117,7 @@ const Navbar = ({ blur = false, handleRegistrationModal }) => {
               <li key={`link-${item.title}`} className="my-0 cursor-pointer">
                 <p
                   to={`/${item}`}
-                  className={`font-[400] text-[20px] text-[#062147] leading-[24.06px] decoration-0 flex justify-center items-center capitalize hover:underline hover:text-[#18A5FF]`}
+                  className={`font-[400] text-[20px] text-[#062147] leading-[24.06px] decoration-0 flex justify-center items-center capitalize hover:underline hover:text-[#18A5FF] transition ease transform duration-300`}
                   onClick={item.onClick}
                 >
                   {item.title}
@@ -130,7 +130,7 @@ const Navbar = ({ blur = false, handleRegistrationModal }) => {
         <div className="flex flex-row gap-[1em] items-center justify-center">
           {!userProfile && (
             <p
-              className="font-normal text-[1.1em] text-[#062147] hover:text-[#18A5FF] hover:underline cursor-pointer"
+              className="font-normal text-[1.1em] text-[#062147] hover:text-[#18A5FF] hover:underline cursor-pointer transition ease transform duration-300"
               onClick={() => handleRegistrationModal(true)}
             >
               Iniciar sesión

@@ -26,6 +26,7 @@ const handleProjectsRetrieval = () => {
       );
 
       const data = await Promise.all(projectsPromises);
+      console.log(data);
       return data;
     } catch (error) {
       console.error(error);
@@ -39,6 +40,7 @@ const handleProjectsRetrieval = () => {
       const projects = await getProjectsById();
       const convertedProjects = await convertRetrievedProjects(projects);
       assignProjects(convertedProjects);
+      console.log(convertedProjects);
       return convertedProjects;
     } catch (error) {
       console.error(error);

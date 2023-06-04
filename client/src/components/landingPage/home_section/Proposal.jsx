@@ -3,14 +3,14 @@ import { contributors } from "../../../constants";
 
 const Proposal = () => {
   return (
-    <div className="flex w-full h-fit items-center justify-center px-[7%] md:px-[6%] pt-[50px] overflow-hidden">
-      <div className="flex w-full h-full flex-col items-start justify-start lg:items-center gap-16 lg:gap-[110px]">
-        <div className="flex flex-col items-start w-full justify-start gap-8">
-          <p className="font-normal text-[#B5B5B5] lg:leading-[36px] lg:text-[30px] leading-[20px] text-[1.5rem]">
+    <div className="flex w-full h-screen items-center justify-center px-[7%] md:px-[6%] overflow-hidden">
+      <div className="flex w-full h-full flex-col items-start justify-around lg:items-center gap-4">
+        <div className="flex flex-col items-start w-full justify-start gap-4">
+          <p className="font-normal text-[#B5B5B5] lg:leading-[36px] md:text-[25px] xl:text-[30px] leading-[20px] text-[1.5rem]">
             Confían en nosotros
           </p>
 
-          <div className="carousel flex items-center justify-between gap-[5vw]  w-full h-[fit]">
+          <div className="carousel flex items-center justify-between gap-[150px] w-full h-[fit]">
             {contributors.map((item) => (
               <div
                 className="carousel-item flex flex-row items-start justify-between w-[150px] lg:w-fit"
@@ -26,11 +26,11 @@ const Proposal = () => {
           </div>
         </div>
 
-        <div className="flex flex-col flex-wrap w-full items-center justify-center text-center  gap-10 text-[#062147]">
-          <h1 className="lg:text-[60px] text-[30px] lg:leading-[84px] leading-[30px] font-bold">
+        <div className="w-full flex flex-col items-center justify-center gap-4 text-[#062147]">
+          <h1 className="md:text-[50px] xl:text-[60px] text-[30px] lg:leading-[84px] leading-[30px] font-bold">
             Sé parte de la evolución
           </h1>
-          <p className="font-normal lg:text-[18px] text-[15px] lg:leading-[25.2px] leading-[18px] text-center lg:w-[50%] font-jakarta">
+          <p className="font-normal lg:text-[18px] text-[15px] lg:leading-[25.2px] leading-[18px] text-center lg:w-[60%] font-jakarta">
             Experimenta la
             <span className="font-semibold">
               {" "}
@@ -39,8 +39,10 @@ const Proposal = () => {
             de la tecnología blockchain mientras maximiza el rendimiento de sus
             inversiones inmobiliarias.
           </p>
+        </div>
 
-          <div className="flex flex-col w-full items-center justify-center text-center mt-[50px] gap-10 text-[#062147]">
+        <div className="flex flex-col flex-wrap w-full items-center justify-center text-center gap-10 text-[#062147]">
+          <div className="flex flex-col w-full items-center justify-center text-center gap-10 text-[#062147]">
             <h1 className="lg:text-[40px] lg:leading-[50px] text-[20px] leading-[20px] text-center font-bold">
               Estamos aquí para
             </h1>

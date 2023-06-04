@@ -98,11 +98,11 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
   };
 
   return (
-    <div className="w-full md:h-full h-screen bg-white relative overflow-hidden">
-      <div className=" flex flex-col items-center gap-4 w-full h-full py-12 z-10 md:absolute lg:relative">
-        <div className="flex flex-row gap-4 items-center justify-center md:justify-start w-full mt-[70px] md:mt-0">
+    <div className="w-full md:h-full h-screen bg-white overflow-hidden relative">
+      <div className="absolute flex flex-col items-center gap-4 w-full h-full py-10 z-10 mx-auto">
+        <header className="flex flex-row gap-4 items-center justify-center w-full mt-[70px] md:mt-0">
           <span
-            className={`material-symbols-outlined text-[#B5B5B5] md:flex hidden items-start justify-end h-full cursor-pointer text-[35px] translate-y-4 ${
+            className={`material-symbols-outlined text-[#B5B5B5] md:flex hidden absolute md:top-[10%] xl:top-[9%] left-[10%] items-center justify-center cursor-pointer text-[30px] ${
               currentStep === 4 && "w-fit pl-10"
             }`}
             onClick={() => handleSection(1)}
@@ -111,47 +111,47 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
           </span>
 
           {currentStep !== 4 && (
-            <div className="flex flex-row items-cneter justify-center">
+            <div className="w-full flex flex-row items-cneter justify-center">
               <span
-                className="material-symbols-outlined text-[#B5B5B5] flex md:hidden items-center justify-center cursor-pointer text-[35px] -translate-x-[%]"
+                className="material-symbols-outlined text-[#B5B5B5] flex md:hidden items-center justify-center cursor-pointer text-[35px]"
                 onClick={() => handleSection(1)}
               >
                 chevron_left
               </span>
-              <h2 className="md:text-[40px] text-[30px] text-[#062147] font-semibold mr-16">
+              <h2 className="md:text-[35px] text-[30px] text-[#062147] font-semibold">
                 Recuperación de contraseña
               </h2>
             </div>
           )}
-        </div>
+        </header>
 
         <div className="flex flex-col px-4 md:px-0 h-full">
           {/** Sub recovery section 1 */}
           {currentStep === 1 && (
-            <div className="w-full h-full flex flex-col items-center justify-between p-4 md:p-0 font-jakarta">
-              <div className="flex items-center flex-col w-full h-fit">
-                <div className="flex flex-col items-start gap-4">
-                  <p className="font-Plus_Jakarta_Sans md:text-[20px] text-[18px] text-[#062147] text-center md:text-left">
+            <section className="w-full h-full flex flex-col items-center justify-between gap-8 p-4 md:p-0 font-jakarta">
+              <div className="flex items-start justify-start flex-col w-full h-fit">
+                <div className="flex flex-col items-center justify-center gap-4 w-full">
+                  <p className="font-jakarta md:text-[17.2px] text-[18px] text-[#062147] text-center">
                     {" "}
                     Hola, recuperaremos tu contraseña de forma fácil y rápida.{" "}
                   </p>
 
                   <div className="flex flex-row justify-center items-center md:mt-5 gap-4">
-                    <p className=" text-[18px] text-[#18A5FF]">1</p>
-                    <div className="h-[1px] md:w-[230px] w-[98px] bg-[#B5B5B5]" />
-                    <p className="text-[#B5B5B5] text-[18px]">2</p>
-                    <div className="h-[1px] md:w-[230px] w-[98px] bg-[#B5B5B5]" />
-                    <p className="text-[#B5B5B5] text-[18px]">3</p>
+                    <p className=" text-[18px] font-sen text-[#18A5FF]">1</p>
+                    <div className="h-[1px] md:w-[190px] w-[98px] bg-[#B5B5B5]" />
+                    <p className="text-[#B5B5B5] font-sen text-[18px]">2</p>
+                    <div className="h-[1px] md:w-[190px] w-[98px] bg-[#B5B5B5]" />
+                    <p className="text-[#B5B5B5] font-sen text-[18px]">3</p>
                   </div>
-
-                  <h2 className="text-[20px] font-Plus_Jakarta_Sans text-[#18A5FF] font-semibold md:mt-4 mt-6 text-left">
-                    {" "}
-                    Correo electrónico{" "}
-                  </h2>
-                  <p className="text-[17px] font-Plus_Jakarta_Sans text-[#18A5FF]">
-                    Te enviamos un código pero hey! No lo compartas con nadie.
-                  </p>
                 </div>
+
+                <h2 className="text-[20px] font-Plus_Jakarta_Sans text-[#18A5FF] font-semibold md:mt-4 mt-6 text-left">
+                  {" "}
+                  Correo electrónico{" "}
+                </h2>
+                <p className="text-[17px] font-Plus_Jakarta_Sans text-[#18A5FF]">
+                  Te enviamos un código pero hey! No lo compartas con nadie.
+                </p>
               </div>
 
               <div className="flex w-full h-fit justify-center items-center">
@@ -175,41 +175,41 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
                 </div>
               </div>
 
-              <div className="w-full">
+              <div className="w-full flex items-center justify-center">
                 <button
-                  className="w-full text-[25px] bg-[#062147] hover:bg-[#18A5FF] py-2 text-white flex items-center justify-center font-['Sen'] feont-semibold"
+                  className="w-[85%] text-[25px] bg-[#062147] hover:bg-[#18A5FF] py-1.5 text-white flex items-center justify-center font-['Sen'] feont-semibold"
                   onClick={() => setCurrentStep(2)}
                 >
                   {" "}
                   Recuperar{" "}
                 </button>
               </div>
-            </div>
+            </section>
           )}
 
           {/** Sub recovery section 2 */}
           {currentStep === 2 && (
-            <div className="w-full h-full flex flex-col items-center justify-between p-4 font-jakarta">
+            <section className="w-full h-full flex flex-col items-center justify-between gap-8 font-jakarta">
               <div className="flex flex-col gap-4">
-                <p className="font-Plus_Jakarta_Sans md:text-[22px] text-[18px] text-[#062147] text-center ">
+                <p className="font-jakarta md:text-[17.2px] text-[18px] text-[#062147] text-center ">
                   {" "}
                   Código enviado revisa tu inbox o bandeja de Spam.{" "}
                 </p>
 
                 <div className="flex flex-row justify-center items-center gap-4">
-                  <p className=" text-[18px] text-[#B5B5B5]">1</p>
-                  <div className="h-[1px] md:w-[210px] w-[100px] bg-[#B5B5B5]" />
-                  <p className=" text-[#18A5FF] text-[18px]">2</p>
-                  <div className="h-[1px] md:w-[210px] w-[100px] bg-[#B5B5B5]" />
-                  <p className="text-[#B5B5B5] text-[18px]">3</p>
+                  <p className=" text-[18px] text-[#B5B5B5] font-sen">1</p>
+                  <div className="h-[1px] md:w-[190px] w-[100px] bg-[#B5B5B5]" />
+                  <p className=" text-[#18A5FF] text-[18px] font-sen">2</p>
+                  <div className="h-[1px] md:w-[190px] w-[100px] bg-[#B5B5B5]" />
+                  <p className="text-[#B5B5B5] text-[18px] font-sen">3</p>
                 </div>
 
-                <p className="text-[20px] font-Plus_Jakarta_Sans text-[#18A5FF] text-center  font-semibold">
+                <p className="text-[20px] font-jakarta text-[#18A5FF] text-center font-semibold">
                   Introduce el código enviado.
                 </p>
               </div>
 
-              <div className="relative w-full flex flex-col items-center md:gap-6 gap-1 justify-center pt-4">
+              <div className="relative w-full flex flex-col items-center md:gap-6 gap-1 justify-center">
                 <div className="flex flex-row gap-1 md:gap-6 items-center justify-center">
                   {Array.from({ length: 6 }, (_, i) => (
                     <span
@@ -225,7 +225,10 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
                     </span>
                   ))}
                 </div>
-                <div className="flex md:flex-row flex-col md:items-center items-start justify-between w-full mt-4 gap-3">
+              </div>
+
+              <div className="w-full flex flex-col items-center justify-center gap-6">
+                <div className="flex md:flex-row flex-col md:items-center items-start justify-between w-full gap-3">
                   <p className="text-[#062147] font-['Sen'] text-[20px] hover:underline hover:text-[#18A5FF] cursor-pointer">
                     Reenviar código
                   </p>
@@ -234,43 +237,41 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
                     No he recibido nada{" "}
                   </p>
                 </div>
-              </div>
 
-              <div className="w-full">
                 <button
-                  className="w-full text-[25px] bg-[#062147] py-2 text-white flex items-center justify-center font-['Sen'] feont-semibold"
+                  className="w-full text-[25px] bg-[#062147] py-1.5 text-white flex items-center justify-center font-['Sen'] feont-semibold"
                   onClick={() => setCurrentStep(3)}
                 >
                   {" "}
                   Verificar y continuar{" "}
                 </button>
               </div>
-            </div>
+            </section>
           )}
 
           {/** Sub recovery section 3 */}
           {currentStep === 3 && (
-            <div className="w-full h-full flex flex-col md:items-start justify-between p-4 md:p-0 font-jakarta">
+            <section className="w-full h-full flex flex-col items-center justify-between p-4 md:p-0 font-jakarta">
               <div className="flex flex-col gap-4">
-                <p className="font-Plus_Jakarta_Sans text-[22px] text-[#062147] text-center mt-1">
+                <p className="font-jakarta text-[17.2px] text-[#062147] text-center mt-1">
                   {" "}
                   Genial! Escribe una una contraseña nueva.{" "}
                 </p>
 
                 <div className="flex flex-row justify-center items-center gap-4">
                   <p className=" text-[18px] text-[#B5B5B5]">1</p>
-                  <div className="h-[1px] md:w-[210px] w-[100px] bg-[#B5B5B5]" />
+                  <div className="h-[1px] md:w-[190px] w-[100px] bg-[#B5B5B5]" />
                   <p className="text-[#B5B5B5] text-[18px]">2</p>
-                  <div className="h-[1px] md:w-[210px] w-[100px] bg-[#B5B5B5]" />
+                  <div className="h-[1px] md:w-[190px] w-[100px] bg-[#B5B5B5]" />
                   <p className="text-[#18A5FF] text-[18px]">3</p>
                 </div>
 
                 <p className="text-[20px] font-Plus_Jakarta_Sans text-[#18A5FF] text-center  font-semibold">
-                  Genial! Escribe una una contraseña nueva.
+                  Genial! Ingresa la nueva contraseña.
                 </p>
               </div>
 
-              <div className="flex flex-col items-center justify-center gap-4 w-full">
+              <div className="flex flex-col items-center justify-center gap-8 w-[90%]">
                 <div
                   id="Password-container"
                   className="relative w-full flex flex-row items-center border-b-[2px]"
@@ -316,21 +317,21 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
                 </div>
               </div>
 
-              <div className="w-full ">
+              <div className="w-full flex items-center justify-center">
                 <button
-                  className="w-full text-[25px] bg-[#062147] py-2 text-white flex items-center justify-center font-['Sen'] feont-semibold"
+                  className="w-[90%] text-[25px] bg-[#062147] py-2 text-white flex items-center justify-center font-['Sen'] feont-semibold"
                   onClick={() => setCurrentStep(4)}
                 >
                   {" "}
                   Guardar contraseña{" "}
                 </button>
               </div>
-            </div>
+            </section>
           )}
 
           {/** Password saved succesfully */}
           {currentStep === 4 && (
-            <div className="w-full h-full flex flex-col items-center justify-around md:justify-center">
+            <section className="w-full h-full flex flex-col items-center justify-around md:justify-center">
               <div className="flex flex-col items-center justify-center mt-[100px] md:mt-0 gap-12">
                 <img src={PasswordKey} alt="" className="w-32 h-32" />
                 <h2 className="text-[50px] text-[#062147] font-['sen'] text-center">
@@ -343,7 +344,7 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
               >
                 Volver
               </p>
-            </div>
+            </section>
           )}
         </div>
       </div>

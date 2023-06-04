@@ -10,29 +10,29 @@ const ProjectCard = ({ project }) => {
   const handleInvestButton = () => {};
 
   return (
-    <div className="flex flex-col shadow-sm md:max-h-fit w-full md:w-[500px] mx-h-[500px] bg-[#F7FAFF] carousel-item border-6 mx-4 card-box rounded-md">
+    <div className="flex flex-col shadow-sm w-full md:w-fit md:max-w-[400px] xl:max-w-[500px]  md:max-h-fit max-h-[500px] bg-[#F7FAFF] carousel-item border-6 mx-4 card-box rounded-md">
       {project ? (
         <>
-          <div className="relative md:w-fit h-fit w-full">
+          <div className="relative md:w-fit h-fit w-full font-jakarta">
             <img
               src={project.image}
               alt=""
-              className="md:w-[500px] md:h-[400px] w-full h-[200px] rounded-t-md object-cover min-h-[200px]"
+              className="md:h-[300px]  xl:h-[400px] w-full h-[200px] rounded-t-md object-cover min-h-[200px]"
             />
-            <span className="absolute top-2 left-2 rounded-lg p-2 bg-[#76DBDB] text-white">
-              Category
+            <span className="absolute top-2 left-2 rounded-lg p-2 bg-[#76DBDB] text-white font-light">
+              Co-living
             </span>
-            <span className="absolute top-2 right-2 rounded-lg p-2 bg-[#130D1A66] bg-opacity-50 text-white">
-              # days left
+            <span className="absolute top-2 right-2 rounded-lg p-2 bg-[#130D1A66] bg-opacity-50 text-white font-light">
+              <span className="font-semibold">25</span> Días restantes
             </span>
           </div>
 
           <div className="flex flex-col flex-wrap p-4 gap-2">
-            <h1 className="text-[25px] leading-[30px] font-semibold text-[#062147]">
+            <h1 className="text-[24px] xl:text-[25px] leading-[30px] font-semibold font-sen text-[#062147]">
               {project.name}
             </h1>
             <div className="flex flex-col w-full h-fit items-start mt-2">
-              <p className="font-epilogue font-medium text-[16px] text-center text-[#18A5FF] animate-pulse">
+              <p className="font-jakarta font-medium text-[16px] text-center text-[#18A5FF] animate-pulse">
                 {calculateBarPercentage(0.5, 0.1) + "%"} Completo
               </p>
               <div className="relative w-full h-2 bg-slate-300 rounded-[10px]">
@@ -52,10 +52,10 @@ const ProjectCard = ({ project }) => {
               <InfoBox title="APY" value={"0%"} />
             </div>
 
-            <p className="font-normal leading-[20px] text-[18px] mt-4 text-[#01070E]">
+            <p className="font-normal font-jakarta leading-[20px] text-[17px] xl:text-[18px] mt-4 text-[#01070E]">
               {project.description}
             </p>
-            <p className="font-normal leading-[20px] text-[18px] mt-4 flex flex-row justify-start text-[#01070E]">
+            <p className="font-normal font-jakarta leading-[20px] text-[17px] xl:text-[18px] mt-4 flex flex-row justify-start text-[#01070E]">
               <span className="inline">
                 <LocationIcon />
               </span>
@@ -70,7 +70,7 @@ const ProjectCard = ({ project }) => {
               <CustomButton
                 title="Invertir"
                 handleClick={handleInvestButton}
-                styles="bg-[#062147] px-[50px] py-[25px] text-[21px] flex items-center justify-center w-full h-[40px] text-white hover:bg-[#18A5FF]"
+                styles="bg-[#062147] px-[50px] py-2.5 text-[21px] flex items-center justify-center w-full text-white hover:bg-[#18A5FF]"
               />
             </div>
           </div>

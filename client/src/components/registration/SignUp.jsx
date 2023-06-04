@@ -8,7 +8,7 @@ const InputField = React.forwardRef(
   ({ id, icon, placeholder, handleFocus, type }, ref) => {
     return (
       <div
-        className={`relative w-full flex flex-row items-center border-b-1`}
+        className={`relative w-full flex flex-row items-center border-b`}
         id={`${id}-container`}
       >
         <span

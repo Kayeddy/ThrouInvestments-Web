@@ -25,7 +25,7 @@ const DropdownInput = ({ options, switchTab, style, optionalTitle }) => {
           )}
 
           {style && (
-            <div className="dark:text-white text-[#062147]">
+            <div className="dark:text-white text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-5 h-5 ml-2 -mr-1"
@@ -55,8 +55,8 @@ const DropdownInput = ({ options, switchTab, style, optionalTitle }) => {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items
-          className={`absolute w-40 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${
-            !style && "-translate-x-[80px]"
+          className={`absolute w-52 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${
+            !style && "-translate-x-[90%]"
           }`}
         >
           <div className="py-1">

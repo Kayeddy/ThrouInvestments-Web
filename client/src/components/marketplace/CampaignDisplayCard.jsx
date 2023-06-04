@@ -11,10 +11,11 @@ const CampaignDisplayCard = ({
   projectPrice,
   projectSales,
   projectImage,
+  projectName,
   handleClick,
 }) => {
   return (
-    <div className="md:max-w-[500px] w-full h-fit dark:bg-[#01070E] dark:bg-opacity-20 bg-[#F7FAFF] rounded-sm cursor-pointer">
+    <div className="md:max-w-[500px] w-full h-fit dark:bg-[#01070E] dark:bg-opacity-20 bg-[#F7FAFF] rounded-sm">
       <div className="flex flex-col flex-wrap relative">
         <img
           src={projectImage}
@@ -35,7 +36,10 @@ const CampaignDisplayCard = ({
       </div>
 
       <div className="mt-2 flex flex-col items-start justify-center w-full gap-4 px-3 dark:text-white text-[#062147] font-bold md:font-normal">
-        <h3 className="text-[25px] md:text-[20px] font-bold"> Nombre </h3>
+        <h3 className="text-[25px] md:text-[20px] font-bold">
+          {" "}
+          {projectName ? projectName : "Nombre"}{" "}
+        </h3>
 
         <div className="w-full flex flex-col gap-1 ">
           <p className="text-[#18A5FF]">#% completado </p>

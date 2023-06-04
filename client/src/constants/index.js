@@ -1,7 +1,6 @@
 import {
   Bancolombia,
   AyC,
-  Binance,
   Capital,
   Forbes,
   Home,
@@ -20,6 +19,12 @@ import {
   Help_icon_light,
   Logout_icon_light,
   Theme_dark_icon2,
+  AirBnb,
+  Binance,
+  Canvas,
+  SuperIntendence,
+  Nomad,
+  Vicaria,
 } from "../assets";
 import { handleThemeChange } from "../utils";
 
@@ -125,29 +130,39 @@ export const investmentTypes = [
 
 export const contributors = [
   {
+    name: "AirBnb",
+    image: AirBnb,
+    styles:
+      "md:h-[35px] md:w-[140px] xl:h-[40px] xl:w-[190px] h-[20px] w-[95px] grayscale",
+  },
+  {
     name: "Binance",
     image: Binance,
-    styles: "lg:h-[40px] lg:w-[190px] h-[20px] w-[95px]",
+    styles:
+      "md:h-[60px] md:w-[120px] xl:h-[80px] xl:w-[160px] h-[55px] w-[90px] grayscale",
   },
   {
-    name: "Arquitectura & concreto",
-    image: AyC,
-    styles: "lg:h-[110px] lg:w-[180px] h-[55px] w-[90px]",
+    name: "SuperIntendence",
+    image: SuperIntendence,
+    styles:
+      "md:h-[80px] md:w-[140px] xl:h-[110px] xl:w-[170px] h-[15px] w-[75px] grayscale",
   },
   {
-    name: "Forbes",
-    image: Forbes,
-    styles: "lg:h-[30px] lg:w-[150px] h-[15px] w-[75px]",
-  },
-  {
-    name: "Contructora capital",
-    image: Capital,
+    name: "Canvas",
+    image: Canvas,
     styles: "lg:h-[40px] lg:w-[130px] h-[20px] w-[65px]",
   },
   {
-    name: "Bancolombia",
-    image: Bancolombia,
-    styles: "lg:h-[30px] lg:w-[271px] h-[15px] w-[135.5px]",
+    name: "Nomad",
+    image: Nomad,
+    styles:
+      "md:h-[60px] md:w-[140px] xl:h-[100px] xl:w-[271px] h-[15px] w-[135.5px] grayscale",
+  },
+  {
+    name: "Vicaria",
+    image: Vicaria,
+    styles:
+      "md:h-[60px] md:w-[140px] xl:h-[100px] xl:w-[300px] h-[15px] w-[135.5px] grayscale",
   },
 ];
 

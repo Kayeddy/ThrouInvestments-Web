@@ -26,12 +26,12 @@ const Main = ({ handleModal }) => {
       {CurrentSection === 1 && (
         <>
           {/** Desktop version */}
-          <div className="md:flex hidden w-fit h-fit flex-row">
-            <div className="flex flex-col relative w-fit h-fit z-10">
+          <div className="md:flex hidden w-fit h-full flex-row">
+            <div className="flex flex-col relative w-fit min-w-[200px] h-fit z-10">
               <img
                 src={LoginBg}
                 alt=""
-                className="h-[60vh] w-[400px] object-cover"
+                className="min-h-[470px] h-[60vh] max-h-[800px] w-[400px] min-w-[360px] object-cover"
               />
 
               <div className="absolute w-full h-full flex flex-col items-start justify-between p-8 gap-10">
@@ -39,7 +39,7 @@ const Main = ({ handleModal }) => {
                   <h2 className="lg:text-[55px] md:text-[45px] text-white font-bold leading-[50px] font-['sen']">
                     Bienvenido a casa
                   </h2>
-                  <p className="font-Plus_Jakarta_Sans  text-white text-[20px] font-jakarta">
+                  <p className="font-Plus_Jakarta_Sans  text-white text-[18px] font-jakarta">
                     {" "}
                     Mauris urna nisi vitae praesent a pulvinar ut erat mattis
                     nibh sagittis.{" "}
@@ -50,7 +50,7 @@ const Main = ({ handleModal }) => {
                   <img
                     src={Throu_l_footer}
                     alt=""
-                    className="w-[100px] h-[20px]"
+                    className="w-[80px] h-[18px]"
                   />
                   <div className="flex flex-row justify-between items-center w-full gap-4 hover:underline ">
                     <p className="text-white text-[18px] hover:text-[#18A5FF] cursor-pointer">
@@ -66,7 +66,7 @@ const Main = ({ handleModal }) => {
               </div>
             </div>
 
-            <div className="w-[550px] h-[60vh]">
+            <div className="min-w-[400px] md:w-[45vw] lg:w-[60vw] md:max-w-[550px] xl:max-w-[600px] min-h-[470px] h-[60vh] max-h-[800px]">
               <LogIn handleModal={handleModal} handleSection={handleSection} />
             </div>
           </div>
@@ -95,7 +95,7 @@ const Main = ({ handleModal }) => {
               <img
                 src={SignupBg}
                 alt=""
-                className="h-[60vh] w-[400px] object-cover"
+                className="min-h-[470px] h-[60vh] max-h-[800px] w-[400px] min-w-[360px] object-cover"
               />
 
               <div className="absolute w-full h-full flex flex-col items-start justify-between p-8 gap-10">
@@ -103,7 +103,7 @@ const Main = ({ handleModal }) => {
                   <h2 className="lg:text-[55px] md:text-[50px] text-white font-bold leading-[50px] font-['sen']">
                     Conectar
                   </h2>
-                  <p className="font-Plus_Jakarta_Sans  text-white text-[20px] font-jakarta">
+                  <p className="font-Plus_Jakarta_Sans  text-white text-[18px] font-jakarta">
                     {" "}
                     Mauris urna nisi vitae praesent a pulvinar ut erat mattis
                     nibh sagittis.{" "}
@@ -114,7 +114,7 @@ const Main = ({ handleModal }) => {
                   <img
                     src={Throu_l_footer}
                     alt=""
-                    className="w-[100px] h-[20px]"
+                    className="w-[80px] h-[18px]"
                   />
                   <div className="flex flex-row justify-between items-center w-full gap-4">
                     <p className="text-white text-[18px] hover:underline hover:text-[#18A5FF] cursor-pointer">
@@ -130,7 +130,7 @@ const Main = ({ handleModal }) => {
               </div>
             </div>
 
-            <div className="w-[550px] h-[60vh]">
+            <div className="min-w-[410px] md:w-[45vw] lg:w-[60vw] md:max-w-[550px] xl:max-w-[600px] min-h-[470px] h-[60vh] max-h-[800px]">
               <Connect
                 handleModal={handleModal}
                 handleSection={handleSection}
@@ -155,7 +155,7 @@ const Main = ({ handleModal }) => {
               <img
                 src={SignupBg}
                 alt=""
-                className="h-[70vh] w-[400px] object-cover"
+                className="min-h-[450px] h-[60vh] max-h-[800px] w-[400px] min-w-[360px] object-cover"
               />
 
               <div className="absolute w-full h-full flex flex-col items-start justify-between p-8 gap-10">
@@ -163,7 +163,7 @@ const Main = ({ handleModal }) => {
                   <h2 className="lg:text-[55px] md:text-[45px] text-white font-bold leading-[50px] font-['sen']">
                     Registrate
                   </h2>
-                  <p className="font-Plus_Jakarta_Sans  text-white text-[20px] font-jakarta">
+                  <p className="font-Plus_Jakarta_Sans  text-white text-[18px] font-jakarta">
                     {" "}
                     Mauris urna nisi vitae praesent a pulvinar ut erat mattis
                     nibh sagittis.{" "}
@@ -174,7 +174,7 @@ const Main = ({ handleModal }) => {
                   <img
                     src={Throu_l_footer}
                     alt=""
-                    className="w-[100px] h-[20px]"
+                    className="w-[80px] h-[18px]"
                   />
                   <div className="flex flex-row justify-between items-center w-full gap-4">
                     <p className="text-white text-[18px] hover:underline hover:text-[#18A5FF] cursor-pointer">
@@ -190,7 +190,7 @@ const Main = ({ handleModal }) => {
               </div>
             </div>
 
-            <div className="w-[550px] md:h-[70vh] h-screen">
+            <div className="min-w-[400px] md:w-[45vw] lg:w-[60vw] md:max-w-[550px] xl:max-w-[600px] min-h-[450px] h-[60vh] max-h-[800px]">
               <SignUp handleModal={handleModal} handleSection={handleSection} />
             </div>
           </div>
@@ -212,13 +212,13 @@ const Main = ({ handleModal }) => {
 
       {/**Terms and conditions tab content**/}
       {CurrentSection === 4 && (
-        <div className="w-full h-[73vh] flex items-center justify-center">
+        <div className="w-screen h-screen md:w-full md:max-w-[800px] xl:max-w-[800px] md:min-h-[450px] md:h-[60vh] md:max-h-[800px] flex items-center justify-center mx-auto">
           <Terms handleSection={handleSection} />
         </div>
       )}
 
       {CurrentSection === 5 && (
-        <div className="md:w-[75vw] w-full h-[70vh] flex items-center justify-center">
+        <div className="w-screen h-screen md:min-w-[750px] md:w-[90vw] md:max-w-[900px] lg:min-w-[900px] xl:w-[1000px] xl:max-w-[1000px] md:min-h-[500px] md:h-[60vh] md:max-h-[800px] flex items-center justify-center">
           <PasswordRecovery
             handleModal={handleModal}
             handleSection={handleSection}

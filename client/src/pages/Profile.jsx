@@ -8,6 +8,7 @@ import {
   Navbar,
   FooterNav,
   DropdownInput,
+  WalletConnectionModal,
 } from "../components/marketplace";
 
 import { BsCurrencyEuro, BsPlus as PlusIcon } from "react-icons/bs";
@@ -26,10 +27,17 @@ import useStore from "../context/index";
 
 const Profile = () => {
   const [currentTab, setCurrentTab] = useState("Mis proyectos");
+  const [showWalletConnectionModal, setShowWalletConnectionModal] =
+    useState(false);
 
   const { userProfile } = useStore();
   const handleTabChange = (tab) => {
     setCurrentTab(tab);
+  };
+
+  const handleWalletModal = (state) => {
+    console.log("Wallet modal state changed");
+    setShowWalletConnectionModal(state);
   };
 
   useEffect(() => {
@@ -59,11 +67,15 @@ const Profile = () => {
         className="z-0 fixed top-[-300px] right-0 w-[350px] brightness-200 blur-md"
       />
       <div className="fixed top-0 z-20 w-full h-fit">
-        <Navbar />
+        <Navbar handleWalletModal={handleWalletModal} />
       </div>
       <div className="flex absolute bottom-0 z-10 w-full h-fit">
         <Footer />
       </div>
+
+      {showWalletConnectionModal && (
+        <WalletConnectionModal handleShowModal={handleWalletModal} />
+      )}
 
       <div className="items-center justify-center p-4 fixed bottom-[50%] right-0 bg-[#062147] hover:bg-[#18A5FF] md:flex hidden z-10 hover:cursor-pointer group hover:p-2">
         <span className="text-white text-[25px] flex flex-row items-center justify-center gap-4">

@@ -7,7 +7,7 @@ import {
   Home,
   CampaignDetails,
   AboutUs,
-  Registration,
+  UserVerification,
   Learn,
 } from "./pages";
 
@@ -21,6 +21,7 @@ const App = () => {
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/perfil" element={<Profile />} />
         <Route path="/marketplace/:id" element={<CampaignDetails />} />
+        <Route path="/user_verification" element={<UserVerification />} />
       </Routes>
     </div>
   );

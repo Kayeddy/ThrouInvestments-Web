@@ -13,11 +13,32 @@ import {
   CustomButton,
 } from "../marketplace";
 
-import { Filter_icon, OrderFilter_icon } from "../../assets";
+import {
+  Exterior_1,
+  Exterior_2,
+  Exterior_3,
+  Exterior_4,
+  Interior_1,
+  Interior_2,
+  Interior_3,
+  Interior_4,
+  Filter_icon,
+  OrderFilter_icon,
+} from "../../assets";
 
 const CampaignsDisplay = ({ title, campaigns, loading }) => {
   const [renderOverlay, setRenderOverlay] = useState(false);
   const selectedCampaign = useRef({});
+
+  const testProjects = [
+    {
+      name: "Shoji",
+      media: {
+        interiorPictures: [Interior_1, Interior_2, Interior_3, Interior_4],
+        exteriorPictures: [Exterior_3, Exterior_1, Exterior_2, Exterior_4],
+      },
+    },
+  ];
 
   const openModal = (campaign) => {
     selectedCampaign.current = campaign;
@@ -139,8 +160,9 @@ const CampaignsDisplay = ({ title, campaigns, loading }) => {
         <div className="flex flex-col gap-6 w-full h-fit container mx-auto ">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 container w-full mx-auto h-fit">
             <CampaignDisplayCard
-              handleClick={() => handleNavigate(campaigns[0])}
-              projectImage="https://c0.wallpaperflare.com/preview/817/828/930/architecture-beautiful-exterior-family-house.jpg"
+              handleClick={() => handleNavigate(testProjects[0])}
+              projectImage={Exterior_3}
+              projectName="Shoji"
             />
             <CampaignDisplayCard projectImage="https://c0.wallpaperflare.com/preview/108/456/1011/white-and-brown-concrete-building.jpg" />
             <CampaignDisplayCard projectImage="https://c1.wallpaperflare.com/preview/120/272/942/luxury-home-upscale-architecture-design.jpg" />

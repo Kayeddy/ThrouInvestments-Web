@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   MdKeyboardArrowLeft as LeftArrow,
@@ -6,12 +6,18 @@ import {
 } from "react-icons/md";
 import { TiArrowSortedDown as DownArrow } from "react-icons/ti";
 
-import { InfoBox, CustomButton } from "../../marketplace";
+import { InfoBox, CustomButton, DropdownInput } from "../../marketplace";
 import { calculateBarPercentage } from "../../../utils";
 import { Favorites_icon } from "../../../assets";
 
 const CampaignDetailsHeader = ({ campaign }) => {
   const navigate = useNavigate();
+
+  const [activeImage, setActiveImage] = useState(0);
+  const [imageCategory, setImageCategory] = useState("Exterior");
+  const [displayImages, setDisplayImages] = useState([
+    ...campaign.media.exteriorPictures,
+  ]);
 
   const testProjectImages = [
     "https://images.squarespace-cdn.com/content/v1/542e3f91e4b00f1e0f262de2/1566777731086-8G94TEZ8V1JYLACAUE5D/courtyard+LR.jpg?format=1000w",
@@ -20,23 +26,21 @@ const CampaignDetailsHeader = ({ campaign }) => {
     "https://i2.au.reastatic.net/800x600/d434bc97c3cfe3e0ca5b21191667303ca94f0b856052ab661ac08add95cbe890/main.jpg",
   ];
 
-  const currentCarouselImage = useRef(testProjectImages[0]);
-
-  const scrollProjectImages = (direction) => {
-    if (direction === "left") {
-      currentCarouselImage.current =
-        testProjectImages[
-          testProjectImages.indexOf(currentCarouselImage.current - 1)
-        ];
-    } else {
-      currentCarouselImage.current =
-        testProjectImages[
-          testProjectImages.indexOf(currentCarouselImage.current + 1)
-        ];
-    }
-  };
+  const imageCategories = ["Exterior", "Interior"];
 
   const handleClick = () => {};
+
+  const handleLeftClick = () => {
+    setActiveImage((prevActiveImage) =>
+      prevActiveImage > 0 ? prevActiveImage - 1 : displayImages.length - 1
+    );
+  };
+
+  const handleRightClick = () => {
+    setActiveImage((prevActiveImage) =>
+      prevActiveImage < displayImages.length - 1 ? prevActiveImage + 1 : 0
+    );
+  };
 
   return (
     <div>
@@ -51,7 +55,7 @@ const CampaignDetailsHeader = ({ campaign }) => {
                 <LeftArrow />
               </span>
               <h2 className="md:text-[30px] text-[20px] font-bold dark:text-white text-black">
-                [Nombre del proyecto]
+                {campaign.name}
               </h2>
             </div>
 
@@ -63,19 +67,19 @@ const CampaignDetailsHeader = ({ campaign }) => {
           </div>
           <div className="carousel w-full relative">
             <div
-              className="hidden md:block absolute top-[40%] bottom-0 md:left-[20px] left-0 p-2 text-[30px] bg-[#01070E] text-[#B5B5B5] opacity-50 rounded-lg h-fit cursor-pointer"
-              onClick={() => scrollProjectImages("left")}
+              className="hidden md:block absolute top-[40%] bottom-0 md:left-[20px] left-0 p-2 text-[30px] bg-[#01070E] text-[#B5B5B5] opacity-50 rounded-lg h-fit cursor-pointer select-none"
+              onClick={handleLeftClick}
             >
               <LeftArrow />
             </div>
             <div
-              className="hidden md:block absolute top-[40%] bottom-0 md:right-[20px] right-0 p-2 text-[30px] bg-[#01070E] text-[#B5B5B5] opacity-50 rounded-lg h-fit cursor-pointer"
-              onClick={() => scrollProjectImages("right")}
+              className="hidden md:block absolute top-[40%] bottom-0 md:right-[20px] right-0 p-2 text-[30px] bg-[#01070E] text-[#B5B5B5] opacity-50 rounded-lg h-fit cursor-pointer select-none"
+              onClick={handleRightClick}
             >
               <RightArrow />
             </div>
             <img
-              src={currentCarouselImage.current}
+              src={displayImages[activeImage]}
               alt="imagen del proyecto"
               className="w-full md:h-[550px] h-[350px] object-cover carousel-item"
             />
@@ -83,19 +87,37 @@ const CampaignDetailsHeader = ({ campaign }) => {
 
           <div className=" hidden md:flex flex-row items-center justify-start gap-4 w-full p-4 h-[100px] absolute bottom-0 left-0 right-0 bg-[#01070E80] opacity-100 backdrop-blur-[3px]">
             <div className="flex flex-row gap-2 items-center justify-center bg-[#01070E80] rounded-lg p-2">
-              <span className="text-[15px] text-white flex items-center justify-center">
-                <DownArrow />
-              </span>
-              <p className="text-white text-[18px] font-jakarta"> Interior </p>
+              <DropdownInput
+                options={imageCategories}
+                switchTab={(item) => {
+                  setImageCategory(item);
+                  item === "Exterior"
+                    ? setDisplayImages(campaign.media.exteriorPictures)
+                    : setDisplayImages(campaign.media.interiorPictures);
+                }}
+                style="hover:underline hover:text-[#18A5FF] text-white"
+              />
             </div>
             <div className="flex flex-row gap-2 w-full carousel">
-              {testProjectImages.map((item) => (
-                <img
-                  src={item}
-                  alt="Other campaign images"
-                  className="h-[60px] w-[60px]"
-                />
-              ))}
+              {imageCategories === "Exterior"
+                ? displayImages.map((item, index) => (
+                    <img
+                      src={item}
+                      alt="exterior_images"
+                      className={`h-[60px] w-[60px] object-cover ${
+                        index === activeImage ? "h-[70px] w-[70px]" : ""
+                      }`}
+                    />
+                  ))
+                : displayImages.map((item, index) => (
+                    <img
+                      src={item}
+                      alt="interior_images"
+                      className={`h-[60px] w-[60px] object-cover ${
+                        index === activeImage ? "h-[70px] w-[70px]" : ""
+                      }`}
+                    />
+                  ))}
             </div>
           </div>
 
@@ -108,12 +130,7 @@ const CampaignDetailsHeader = ({ campaign }) => {
         </div>
 
         <div className=" flex md:hidden flex-row items-center justify-start gap-4 w-full p-4 h-[100px]  backdrop-blur-[3px]">
-          <div className="flex flex-row gap-2 items-center justify-center bg-[#01070E80] rounded-lg p-2">
-            <span className="text-[15px] text-white flex items-center justify-center">
-              <DownArrow />
-            </span>
-            <p className="text-white text-[18px] font-jakarta"> Interior </p>
-          </div>
+          <div className="flex flex-row gap-2 items-center justify-center bg-[#01070E80] rounded-lg p-2"></div>
           <div className="flex flex-row gap-2 w-full carousel">
             {testProjectImages.map((item) => (
               <img

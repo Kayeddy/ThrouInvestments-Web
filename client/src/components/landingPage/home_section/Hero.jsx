@@ -18,18 +18,18 @@ const Hero = () => {
           </h3>
           <div className="flex w-full md:flex-row flex-col gap-4 md:gap-12 items-center justify-end md:justify-start md:items-center h-full md:h-fit pb-16">
             <CustomButton
-              styles="border-2 border-[#062147] px-12 py-[10px] flex items-center justify-center text-white hidden md:block hover:text-white bg-[#062147] hover:bg-[#18A5FF] hover:border-[#18A5FF] text-[18px]"
+              styles="border-2 border-[#062147] px-12 py-[10px] flex items-center justify-center text-white hidden md:block hover:text-white bg-[#062147] hover:bg-[#18A5FF] hover:border-[#18A5FF] transition ease transform duration-300 text-[18px]"
               title="Explorar"
               handleClick={handleExplore}
             />
             <CustomButton
-              styles="px-16 py-4 flex items-center justify-center w-full h-16 text-white bg-[#062147] md:hidden text-[24px]"
+              styles="px-16 py-4 flex items-center justify-center w-full h-16 text-white bg-[#062147] md:hidden text-[24px] transition ease transform duration-300"
               title="Invertir"
               handleClick={handleExplore}
             />
             <a
               href=""
-              className="text-[#062147] text-[20px] md:text-[18px] md:border-2 border-transparent hover:underline hover:text-[#18A5FF] md:font-semibold"
+              className="text-[#062147] text-[20px] md:text-[18px] md:border-2 border-transparent hover:underline hover:text-[#18A5FF] md:font-semibold transition ease transform duration-300"
             >
               Conocer más
             </a>

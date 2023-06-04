@@ -60,10 +60,10 @@ const Projects = () => {
   ];
 
   return (
-    <div className="flex w-full h-fit items-center justify-center  mt-[100px] overflow-hidden">
-      <div className="flex md:flex-row flex-col items-center justify-center w-full gap-8">
-        <div className="w-fit h-fit flex flex-col py-10 px-[7%] md:py-[250px] text-[#062147] md:pl-[7%] md:pr-10 md:shadow-sm gap-4 md:gap-12  rounded-md md:text-left text-center">
-          <h1 className="font-semibold md:text-[60px] text-[25px] md:text-left text-center font-sen">
+    <div className="flex w-full h-screen items-center justify-center overflow-hidden">
+      <div className="flex md:flex-row flex-col items-center justify-start w-full md:pl-[7%] gap-4">
+        <div className="w-fit h-fit flex flex-col py-10 md:min-w-[500px] md:w-[600px] lg:min-w-[450px] xl:min-w-[700px] md:py-[170px] xl:py-[200px] md:px-6 text-[#062147] shadow-project-section-custom gap-4 md:gap-12 rounded-md md:text-left text-center">
+          <h1 className="font-semibold md:text-[36px] xl:text-[45px] text-[25px] md:text-left text-center font-sen">
             <span className="md:text-[#18A5FF] text-[#8C06B1] font-bold">
               Proyectos
             </span>{" "}
@@ -94,13 +94,16 @@ const Projects = () => {
           </div>
         </div>
 
-        <div className="relative md:w-[45%] w-full px-[5%] md:px-0 md:py-6 pb-4 mt-[50px]">
-          <div className="carousel overflow-x-auto" ref={carouselRef}>
+        <div className="relative w-full md:py-6 pb-4 xl:mt-6">
+          <div
+            className="carousel w-full overflow-x-auto px-[5%] md:px-0 md:pr-[5%] xl:pr-[720px]"
+            ref={carouselRef}
+          >
             {projects.map((item) => (
               <ProjectCard project={item} key={item.name} />
             ))}
           </div>
-          <div className="flex justify-center w-full py-2 gap-2 mt-4">
+          <div className="flex justify-center w-[50%] xl:w-[65%] py-2 gap-2 mt-4">
             <button
               onClick={() => scrollTo("left")}
               className="w-3 h-3 rounded-full bg-gray-400 cursor-pointer hover:bg-[#18A5FF]"

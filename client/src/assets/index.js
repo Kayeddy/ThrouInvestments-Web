@@ -28,7 +28,6 @@ import Throu_sm_dark from "./Throu_sm_dark.svg";
 import landingBg from "./landingBg.png";
 import Bancolombia from "./Bancolombia.png";
 import AyC from "./AyC.png";
-import Binance from "./Binance.png";
 import Capital from "./Capital.png";
 import Forbes from "./Forbes.png";
 import BoxArrow from "./BoxArrow.png";
@@ -134,6 +133,31 @@ import Apple from "./SocialMedia/Apple.png";
 import Facebook from "./SocialMedia/Facebook.png";
 import Google from "./SocialMedia/Google.png";
 
+//AlliesImages ----------------------------------------------------------------
+
+import AirBnb from "./Allies/airbnb.png";
+import Binance from "./Allies/binance.png";
+import Canvas from "./Allies/canvas.png";
+import SuperIntendence from "./Allies/superintendencia.png";
+import Nomad from "./Allies/nomade.jpeg";
+import Vicaria from "./Allies/vicaria.png";
+
+// Test project images
+
+// Shoji interior
+
+import Interior_1 from "./Test_projects/SHOJI/Interior/Interior_1.jpg";
+import Interior_2 from "./Test_projects/SHOJI/Interior/Interior_2.jpg";
+import Interior_3 from "./Test_projects/SHOJI/Interior/Interior_3.jpg";
+import Interior_4 from "./Test_projects/SHOJI/Interior/Interior_4.jpg";
+
+// Shoji exterior
+
+import Exterior_1 from "./Test_projects/SHOJI/Exterior/Exterior_1.jpg";
+import Exterior_2 from "./Test_projects/SHOJI/Exterior/Exterior_2.jpg";
+import Exterior_3 from "./Test_projects/SHOJI/Exterior/Exterior_3.jpg";
+import Exterior_4 from "./Test_projects/SHOJI/Exterior/Exterior_4.jpg";
+
 export {
   tagType,
   createCampaign,
@@ -165,7 +189,6 @@ export {
   landingBg,
   Bancolombia,
   AyC,
-  Binance,
   Capital,
   Forbes,
   BoxArrow,
@@ -268,4 +291,25 @@ export {
   Apple,
   Facebook,
   Google,
+
+  //AlliesImages ----------------------------------------------------------------
+  AirBnb,
+  Binance,
+  Canvas,
+  SuperIntendence,
+  Nomad,
+  Vicaria,
+
+  // Test project images
+  // Shoji interior
+  Interior_1,
+  Interior_2,
+  Interior_3,
+  Interior_4,
+
+  // Shoji exterior
+  Exterior_1,
+  Exterior_2,
+  Exterior_3,
+  Exterior_4,
 };

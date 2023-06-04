@@ -3,7 +3,7 @@ import { CustomButton, FooterNav } from "./index";
 import { RxDoubleArrowUp as UpArrow } from "react-icons/rx";
 import { AiOutlineUserAdd as UserIcon } from "react-icons/ai";
 import { BsWallet2 as WalletIcon } from "react-icons/bs";
-import { Bg_logo2_right } from "../../assets";
+import { Bg_Logo2_right } from "../../assets";
 
 const Footer = () => {
   return (
@@ -77,7 +77,7 @@ const Footer = () => {
 
           <div className="absolute right-[-90px] rotate-[-20deg] top-0 z-10 w-fit">
             <img
-              src={Bg_logo2_right}
+              src={Bg_Logo2_right}
               alt="Half_logo_purple"
               className="w-[10vw] h-[300px]"
             />

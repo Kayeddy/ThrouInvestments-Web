@@ -16,7 +16,6 @@ import Help_icon_light from "./Help_icon_light.svg";
 import Logout_icon_light from "./Logout_icon_light.svg";
 import Theme_dark_icon2 from "./Theme_dark_icon2.svg";
 import tagType from "./type.svg";
-import search from "./search.svg";
 import menu from "./menu.svg";
 import money from "./money.svg";
 import throu from "./throu.png";
@@ -177,7 +176,6 @@ export {
   Help_icon_light,
   Logout_icon_light,
   Theme_dark_icon2,
-  search,
   menu,
   money,
   throu,

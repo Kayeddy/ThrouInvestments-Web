@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Chart from "react-google-charts";
 
-import { InfoBox, CustomButton, CampaignUserDisplaycard } from "../";
+import { InfoBox, CustomButton, CampaignUserDisplayCard } from "../";
 import ProjectChart from "../utilityComponents/ProjectChart";
 
 const Portfolio = () => {
@@ -45,10 +45,10 @@ const Portfolio = () => {
       </div>
 
       <div className="w-fit carousel gap-[30px] mt-[50px]">
-        <CampaignUserDisplaycard projectImage="https://bucket-api.domain.com.au/v1/bucket/image/16316394_1_1_230207_061618-w2000-h1333" />
-        <CampaignUserDisplaycard projectImage="https://bucket-api.domain.com.au/v1/bucket/image/16316394_1_1_230207_061618-w2000-h1333" />
-        <CampaignUserDisplaycard projectImage="https://bucket-api.domain.com.au/v1/bucket/image/16316394_1_1_230207_061618-w2000-h1333" />
-        <CampaignUserDisplaycard projectImage="https://bucket-api.domain.com.au/v1/bucket/image/16316394_1_1_230207_061618-w2000-h1333" />
+        <CampaignUserDisplayCard projectImage="https://bucket-api.domain.com.au/v1/bucket/image/16316394_1_1_230207_061618-w2000-h1333" />
+        <CampaignUserDisplayCard projectImage="https://bucket-api.domain.com.au/v1/bucket/image/16316394_1_1_230207_061618-w2000-h1333" />
+        <CampaignUserDisplayCard projectImage="https://bucket-api.domain.com.au/v1/bucket/image/16316394_1_1_230207_061618-w2000-h1333" />
+        <CampaignUserDisplayCard projectImage="https://bucket-api.domain.com.au/v1/bucket/image/16316394_1_1_230207_061618-w2000-h1333" />
 
         <div className="carousel-item flex flex-col gap-4 items-center justify-center w-full md:w-[300px] min-h-full text-center bg-[#062147] dark:opacity-100 opacity-80 rounded-xl shadow-[0px_0px_10px_rgba(24,165,255,0.15)]">
           <span className="material-symbols-outlined text-white text-[120px]">

@@ -15,7 +15,7 @@ export { default as DropdownInput } from "./DropdownInput";
 export { default as BottomInvestBar } from "./BottomInvestBar";
 export { default as DynamicContentTab } from "./DynamicContentTab";
 export { default as CampaignImageContainer } from "./CampaignImageContainer";
-export { default as CampaignUserDisplaycard } from "./CampaignUserDisplaycard";
+export { default as CampaignUserDisplayCard } from "./CampaignUserDisplayCard";
 export { default as WalletConnectionModal } from "./WalletConnectionModal";
 
 export { default as CampaignDetailsHeader } from "./campaignDetailsPieces/CampaignDetailsHeader";

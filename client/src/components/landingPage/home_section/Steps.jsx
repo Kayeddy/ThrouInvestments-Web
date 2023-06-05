@@ -18,9 +18,9 @@ import { StepsCard } from "./utility_components";
 
 const Steps = () => {
   return (
-    <div className="flex flex-col w-full h-screen md:h-[620px] xl:h-[800px] items-center justify-start md:pl-[7%]  overflow-hidden">
+    <div className="flex flex-col w-full h-fit md:h-screen items-center justify-start md:pl-[7%] overflow-hidden">
       <div className="w-full h-full flex-col md:flex hidden items-start justify-start">
-        <div className="flex flex-col justify-start items-start w-full h-fit pl-[10%] relative">
+        <div className="flex flex-col gap-2 justify-start items-start w-full h-fit md:pl-[10%] relative">
           <p className="text-left text-[#062147] font-bold leading-[50px] text-[40px]">
             Estaremos en cada
           </p>
@@ -116,12 +116,12 @@ const Steps = () => {
       </div>
 
       {/** Mobile Steps display */}
-      <div className="w-full h-[600px] md:hidden flex flex-col items-start gap-10">
-        <div className="flex flex-col justify-start items-start w-full h-fit pl-[5%]">
+      <div className="w-full md:hidden flex flex-col items-start gap-10">
+        <div className="flex flex-col justify-start items-start w-full h-fit pl-[7%]">
           <p className="text-left text-[#062147] font-bold leading-[1.5em] text-[2em]">
             Estaremos en cada
           </p>
-          <p className="text-left font-bold leading-[2em] text-[3em] text-[#17a5ff]">
+          <p className="text-left font-bold leading-[1.5em] text-[3em] text-[#17a5ff]">
             Paso <span className="opacity-30">a paso</span>
           </p>
           <p className="text-left text-[#062147] font-bold leading-[1.5em] text-[2em]">

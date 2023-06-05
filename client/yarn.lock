@@ -2972,9 +2972,9 @@
   "version" "5.3.1"
 
 "caniuse-lite@^1.0.30001400", "caniuse-lite@^1.0.30001426":
-  "integrity" "sha512-1MgUzEkoMO6gKfXflStpYgZDlFM7M/ck/bgfVCACO5vnAf0fXoNVHdWtqGU+MYca+4bL9Z5bpOVmR33cWW9G2A=="
-  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001439.tgz"
-  "version" "1.0.30001439"
+  "integrity" "sha512-sY2B5Qyl46ZzfYDegrl8GBCzdawSLT4ThM9b9F+aDYUrAG2zCOyMbd2Tq34mS1g4ZKBfjRlzOohQMxx28x6wJg=="
+  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001494.tgz"
+  "version" "1.0.30001494"
 
 "capability@^0.2.5":
   "integrity" "sha512-rsJZYVCgXd08sPqwmaIqjAd5SUTfonV0z/gDJ8D6cN8wQphky1kkAYEqQ+hmDxTw7UihvBfjUVUSY+DBEe44jg=="

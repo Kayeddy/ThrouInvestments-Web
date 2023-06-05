@@ -6,13 +6,13 @@ const Hero = () => {
 
   return (
     <div className="landingPage__bg w-full h-screen pt-[15vh] md:pt-[10vh] object-contain overflow-hidden">
-      <div className="flex flex-wrap flex-col gap-[30px] xl:gap-0 md:w-full h-full text-[#062147] justify-center md:justify-start items-start md:mt-[7%] px-[6%] md:pt-0 md:relative">
-        <h1 className="font-normal text-[30px] md:text-[40px] lg:text-[45px]  text-left leading-[40px] md:leading-[calc(100%+15px)] md:w-[65%] md:mb-[2%]">
+      <div className="flex flex-wrap flex-col gap-2 xl:gap-0 md:w-full h-full text-[#062147] justify-center md:justify-start items-start md:mt-[7%] px-[6%] md:pt-0 md:relative">
+        <h1 className="font-normal text-[30px] md:text-[40px] xl:text-[45px] text-left leading-[40px] md:leading-[calc(100%+15px)] md:w-[65%] lg:w-[80%] xl:w-[70%] md:mb-[2%]">
           Invierte en propiedad raíz a través de la tecnología blockchain
         </h1>
 
         <div className="flex flex-1 flex-col md:flex-none items-start justify-between md:justify-center w-full gap-[2rem]">
-          <h3 className="md:w-[40%] xl:w-[30%] w-[70vw] text-[18px] md:text-[20px] md:leading-[25px] leading-[20px] font-[400px] font-jakarta">
+          <h3 className="md:w-[40%] lg:w-[45%] xl:w-[30%] w-[70vw] text-[18px] md:text-[20px] md:leading-[25px] leading-[20px] font-[400px] font-jakarta">
             Vive el futuro de la inversión inmobiliaria con THROU, maximiza tu
             portafolio y obtén mejores rendimientos.
           </h3>

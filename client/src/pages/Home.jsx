@@ -105,7 +105,7 @@ const Home = () => {
       </div>
 
       <div
-        className={`w-full h-full mx-auto font-sen bg-[#F7FAFF] overflow-x-hidden scroll-smooth flex flex-col items-center justify-between gap-16`}
+        className={`w-full h-full mx-auto font-sen bg-[#F7FAFF] overflow-x-hidden scroll-smooth flex flex-col items-center justify-between gap-20`}
       >
         <Hero />
         <Proposal />

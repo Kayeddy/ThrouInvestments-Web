@@ -40,7 +40,7 @@ const PerksCard = ({ icon, title, description, hoverIcon, imgStyle }) => {
     <div
       className={`${cardTapped ? "h-[320px] bg-[#062147]" : "h-[200px]"} ${
         !isTouchDevice && "nonTouchDevice hover:bg-[#062147]"
-      }  md:min-h-[300px] md:min-w-[300px] md:w-[25vw] md:p-6 p-3 sm:w-[250px] md:h-[320px]  w-[180px] flex flex-col gap-4 justify-center items-center rounded-lg shadow-lg md:shadow-none bg-[#F7FAFF] group transition ease-in-out delay-50 z-10`}
+      }  delay-50 group z-10 flex w-[180px] flex-col items-center justify-center gap-2 rounded-lg bg-[#F7FAFF] p-3 shadow-lg transition ease-in-out sm:w-[250px] md:h-[300px] md:min-h-[300px] md:w-[25vw] md:min-w-[300px] md:p-3 md:shadow-none xl:h-[320px]`}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
       onClick={handleTap}
@@ -50,29 +50,29 @@ const PerksCard = ({ icon, title, description, hoverIcon, imgStyle }) => {
         alt={title}
         className={`${
           currentIcon !== defaultIcon.current &&
-          `group-hover:w-[45px] group-hover:h-[50px]`
-        } ${isTouchDevice && cardTapped ? imgStyle : "w-[50px] h-[50px]"}`}
+          `group-hover:h-[50px] group-hover:w-[50px]`
+        } ${isTouchDevice && cardTapped ? imgStyle : "h-[45px] w-[50px]"}`}
       />
 
       {/** Desktop dynamic content */}
-      <div className="hidden md:flex items-center justify-between flex-col gap-6 px-2 text-center group h-full">
-        <h3 className="font-semibold text-[20px] sm:text-[25px] leading-[1em] lg:leading-[1.5em] flex-wrap lg:group-hover:text-[#1486d4] text-[#062147]">
+      <div className="group hidden h-fit flex-col items-center justify-around gap-4 px-2 text-center md:flex">
+        <h3 className="flex-wrap font-semibold leading-[1em] text-[#062147] sm:text-[25px] md:text-[22px] lg:leading-[1.5em] lg:group-hover:text-[#1486d4] xl:text-[25px]">
           {title}
         </h3>
-        <p className="text-[15px] sm:text-base font-normal leading-[1em] lg:group-hover:text-white text-[#01070E] font-jakarta">
+        <p className="font-jakarta text-[15px] font-normal leading-[1em] text-[#01070E] sm:text-base lg:group-hover:text-white">
           {description}
         </p>
 
-        <p className="text-[#1486d4] hover:underline hover:text-[17px] cursor-pointer ">
+        <p className="cursor-pointer text-[#1486d4] hover:text-[17px] hover:underline ">
           Explorar
         </p>
       </div>
 
       {/** Mobile dynamic content */}
 
-      <div className="flex md:hidden items-center justify-between flex-col gap-6 md:px-2 text-center h-fit">
+      <div className="flex h-fit flex-col items-center justify-between gap-6 text-center md:hidden md:px-2">
         <h3
-          className={`font-semibold text-[20px] sm:text-[25px] leading-[1em] lg:leading-[1.5em] flex-wrap ${
+          className={`flex-wrap text-[20px] font-semibold leading-[1em] sm:text-[25px] lg:leading-[1.5em] ${
             cardTapped ? "text-[#1486d4]" : "text-[#062147]"
           }`}
         >
@@ -81,15 +81,15 @@ const PerksCard = ({ icon, title, description, hoverIcon, imgStyle }) => {
 
         {cardTapped && (
           <p
-            className={`text-[15px] sm:text-base font-normal leading-[1em] font-jakarta ${
-              cardTapped ? "text-white" : "text-[#01070E]"
+            className={`font-jakarta text-[15px] font-normal leading-[1em] sm:text-base ${
+              cardTapped ? "text-[#01070E]" : "text-[#01070E]"
             }`}
           >
             {description}
           </p>
         )}
 
-        <p className="text-[#1486d4] hover:underline hover:text-[17px] cursor-pointer ">
+        <p className="cursor-pointer text-[#1486d4] hover:text-[17px] hover:underline ">
           Explorar
         </p>
       </div>

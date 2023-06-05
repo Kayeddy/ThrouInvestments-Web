@@ -16,13 +16,14 @@ import Help_icon_light from "./Help_icon_light.svg";
 import Logout_icon_light from "./Logout_icon_light.svg";
 import Theme_dark_icon2 from "./Theme_dark_icon2.svg";
 import tagType from "./type.svg";
+import search from "./search.svg";
 import menu from "./menu.svg";
 import money from "./money.svg";
 import throu from "./throu.png";
 import sun from "./sun.svg";
-import Throu_l from "./Throu_l.png";
-import Throu_l_footer from "./Throu_l_footer.png";
-import Throu_sm from "./Throu_sm.png";
+import Throu_l from "./throu_l.png";
+import Throu_l_footer from "./throu_l_footer.png";
+import Throu_sm from "./throu_sm.png";
 import Throu_sm_dark from "./Throu_sm_dark.svg";
 import landingBg from "./landingBg.png";
 import Bancolombia from "./Bancolombia.png";
@@ -85,8 +86,8 @@ import LandingBg2 from "./LandingBg2.jpg";
 
 import AboutUs_team from "./AboutUs_team.png";
 import AboutUs_team2 from "./AboutUs_team2.png";
-import Bg_Logo1_left from "./Bg_Logo1_left.png";
-import Bg_Logo2_right from "./Bg_Logo2_right.png";
+import Bg_logo1_left from "./Bg_logo1_left.png";
+import Bg_logo2_right from "./Bg_logo2_right.png";
 import Quotes from "./Quotes.png";
 import Team_member1 from "./Team_member1.png";
 import Team_member2 from "./Team_member2.png";
@@ -176,6 +177,7 @@ export {
   Help_icon_light,
   Logout_icon_light,
   Theme_dark_icon2,
+  search,
   menu,
   money,
   throu,
@@ -236,8 +238,8 @@ export {
   User_profile_icon,
   User_notifications_icon,
   AboutUs_team,
-  Bg_Logo1_left,
-  Bg_Logo2_right,
+  Bg_logo1_left,
+  Bg_logo2_right,
   Quotes,
   AboutUs_team2,
   Team_member1,

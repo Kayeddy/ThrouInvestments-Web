@@ -62,12 +62,12 @@ const Perks = () => {
   ];
 
   return (
-    <div className="flex flex-col w-full h-screen px-[7%] justify-start items-center flex-grow md:mb-[900px] mb-[1100px]">
-      <h1 className="lg:text-[3.5em] lg:leading-[2em] text-[2em] leading-[1em] text-center font-bold text-[#062147]">
+    <div className="mb-[1000px] md:mb-[1100px] lg:mb-[800px] xl:mb-[750px] flex h-fit md:h-screen w-full flex-grow flex-col items-center justify-start px-[7%]">
+      <h1 className="text-center text-[35px] font-bold text-[#062147] md:text-[38px] xl:text-[45px]">
         ¿Cómo lo Hacemos Posible?
       </h1>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-10 mt-[50px] w-full items-center justify-items-center lg:justify-items-stretch ">
+      <div className="mt-10 grid w-full grid-cols-2 items-center justify-items-center gap-12 md:gap-8 xl:gap-10 lg:grid-cols-3 lg:justify-items-stretch">
         {perksData.map((perk) => (
           <PerksCard
             key={perk.title}
@@ -75,7 +75,7 @@ const Perks = () => {
             title={perk.title}
             description={perk.description}
             hoverIcon={perk.hoverIcon}
-            imgStyle={"w-[45px] h-[50px]"}
+            imgStyle={"w-[10px] h-[45px]"}
           />
         ))}
       </div>

@@ -86,7 +86,7 @@ const Navbar = ({ blur = false, handleRegistrationModal }) => {
     };
   }, []);
 
-  const buttonStyles = `border-2 border-[#062147] px-16 ${
+  const buttonStyles = `border-2 border-[#062147] w-[104px] ${
     blur ? "py-[5px]" : "py-[10px] "
   } flex items-center justify-center text-white hidden md:block hover:text-white bg-[#062147] hover:bg-[#18A5FF] hover:border-[#18A5FF] text-[18px] transition ease transform duration-300`;
 
@@ -105,14 +105,14 @@ const Navbar = ({ blur = false, handleRegistrationModal }) => {
             alt="Logo"
             className={`${
               blur
-                ? "w-[40px] h-[40px] "
-                : "lg:w-[12em] md:w-[13.5vw] lg:h-[50px] md:h-[40px]"
+                ? "w-[40px] h-[40px]"
+                : "md:w-[90px] lg:w-[120px] xl:w-[160px] md:h-[30px] lg:h-[30px] xl:h-[45px]"
             } transition ease-in-out duration-100`}
           />
         </div>
 
         <div className="flex justify-center items-center mx-3">
-          <ul className=" w-full flex justify-center items-center list-none gap-12">
+          <ul className=" w-full flex justify-center items-center list-none gap-6">
             {navbarLinks.map((item) => (
               <li key={`link-${item.title}`} className="my-0 cursor-pointer">
                 <p
@@ -127,10 +127,10 @@ const Navbar = ({ blur = false, handleRegistrationModal }) => {
           </ul>
         </div>
 
-        <div className="flex flex-row gap-[1em] items-center justify-center">
+        <div className="flex flex-row items-center justify-center gap-3">
           {!userProfile && (
             <p
-              className="font-normal text-[1.1em] text-[#062147] hover:text-[#18A5FF] hover:underline cursor-pointer transition ease transform duration-300"
+              className="font-normal text-[18px] text-[#062147] hover:text-[#18A5FF] hover:underline cursor-pointer transition ease transform duration-300"
               onClick={() => handleRegistrationModal(true)}
             >
               Iniciar sesión

@@ -10,7 +10,7 @@ const ProjectCard = ({ project }) => {
   const handleInvestButton = () => {};
 
   return (
-    <div className="flex flex-col shadow-sm w-full md:w-fit md:max-w-[400px] xl:max-w-[500px]  md:max-h-fit max-h-[500px] bg-[#F7FAFF] carousel-item border-6 mx-4 card-box rounded-md">
+    <div className="flex flex-col shadow-sm w-full h-fit md:w-fit md:max-w-[400px] xl:max-w-[500px] md:max-h-fit xl:max-h-[500px] bg-[#F7FAFF] carousel-item border-6 mx-4 rounded-md">
       {project ? (
         <>
           <div className="relative md:w-fit h-fit w-full font-jakarta">
@@ -27,7 +27,7 @@ const ProjectCard = ({ project }) => {
             </span>
           </div>
 
-          <div className="flex flex-col flex-wrap p-4 gap-2">
+          <div className="flex flex-col gap-2 h-fit p-2">
             <h1 className="text-[24px] xl:text-[25px] leading-[30px] font-semibold font-sen text-[#062147]">
               {project.name}
             </h1>
@@ -52,10 +52,10 @@ const ProjectCard = ({ project }) => {
               <InfoBox title="APY" value={"0%"} />
             </div>
 
-            <p className="font-normal font-jakarta leading-[20px] text-[17px] xl:text-[18px] mt-4 text-[#01070E]">
+            <p className="font-normal font-jakarta leading-[20px] text-[16px] md:text-[17px] xl:text-[18px] mt-4 text-[#01070E]">
               {project.description}
             </p>
-            <p className="font-normal font-jakarta leading-[20px] text-[17px] xl:text-[18px] mt-4 flex flex-row justify-start text-[#01070E]">
+            <p className="font-normal font-jakarta leading-[20px] text-[16px] md:text-[17px] xl:text-[18px] mt-4 flex flex-row justify-start text-[#01070E]">
               <span className="inline">
                 <LocationIcon />
               </span>
@@ -66,11 +66,11 @@ const ProjectCard = ({ project }) => {
               <div className="w-full flex items-center justify-start"></div>
             </div>
 
-            <div className="flex w-full">
+            <div className="flex w-full h-fit">
               <CustomButton
                 title="Invertir"
                 handleClick={handleInvestButton}
-                styles="bg-[#062147] px-[50px] py-2.5 text-[21px] flex items-center justify-center w-full text-white hover:bg-[#18A5FF]"
+                styles="bg-[#062147] px-[50px] py-2.5 text-[15px] md:text-[21px] flex items-center justify-center w-full text-white hover:bg-[#18A5FF]"
               />
             </div>
           </div>

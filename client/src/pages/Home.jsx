@@ -22,7 +22,7 @@ import { userConnection } from "../api/server";
 import { Main } from "../components/registration";
 
 const Home = () => {
-  const [navBlur, setNavBlur] = useState(true);
+  const [navBlur, setNavBlur] = useState(null);
   const [scrollIndicator, setScrollIndicator] = useState(true);
   const [toggleRegistrationModal, setToggleRegistrationModal] = useState(false);
 
@@ -49,7 +49,10 @@ const Home = () => {
   };
 
   useEffect(() => {
-    setNavBlur(false);
+    scrollTo({
+      top: 0,
+    });
+    setToggleRegistrationModal(false);
     handleNavBlur();
     handleScrollIndicator();
     toggleRegistrationModal && (document.body.style.overflow = "hidden");
@@ -63,29 +66,8 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen">
-      <div className="fixed top-0 z-20 w-full h-fit">
-        <Navbar
-          blur={navBlur}
-          handleRegistrationModal={handleRegistrationModal}
-        />
-      </div>
-
-      <div className="md:absolute z-50 h-full">
-        {toggleRegistrationModal && (
-          <Overlay>
-            <div className="w-full h-full text-black flex items-center justify-center z-50">
-              <Main handleModal={handleRegistrationModal} />
-            </div>
-          </Overlay>
-        )}
-      </div>
-
       <div className="fixed bottom-0 z-20 w-full h-fit">
         <Cookies />
-      </div>
-
-      <div className="flex absolute bottom-0 z-10 w-full">
-        <Footer />
       </div>
 
       <div className="absolute top-[61%] z-0 right-0">
@@ -105,13 +87,22 @@ const Home = () => {
       </div>
 
       <div
-        className={`w-full h-full mx-auto font-sen bg-[#F7FAFF] overflow-x-hidden scroll-smooth flex flex-col items-center justify-between gap-20`}
+        className={`w-full h-max min-h-screen mx-auto font-sen bg-[#F7FAFF] overflow-x-hidden overflow-y-auto scroll-smooth flex flex-col items-center justify-between gap-8 md:gap-36`}
       >
         <Hero />
         <Proposal />
         <Projects />
-        <Steps />
+        <Steps showRegistrationModal={handleRegistrationModal} />
         <Perks />
+        <Footer showRegistrationModal={handleRegistrationModal} />
+      </div>
+
+      <div className="fixed top-0 z-50 w-full h-fit">
+        <Navbar
+          blur={navBlur}
+          registrationModalState={toggleRegistrationModal}
+          handleRegistrationModal={handleRegistrationModal}
+        />
       </div>
 
       <div className="w-fit h-fit z-10">
@@ -124,7 +115,6 @@ const Home = () => {
       >
         <ScrollIndicator />
       </div>
-      <div className="bg-gradient-to-t from-[#F7FAFF] to-transparent h-[100px] absolute top-[90vh] w-full md:block hidden" />
     </div>
   );
 };

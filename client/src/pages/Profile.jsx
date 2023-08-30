@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import {
   Footer,
-  InfoBox,
-  CustomButton,
-  CampaignUserDisplaycard,
   Navbar,
-  FooterNav,
-  DropdownInput,
   WalletConnectionModal,
 } from "../components/marketplace";
 
@@ -23,14 +18,19 @@ import {
   Saved,
 } from "../components/marketplace/profilePieces";
 
-import useStore from "../context/index";
+import useUserStore from "../context/useUserStore";
 
 const Profile = () => {
   const [currentTab, setCurrentTab] = useState("Mis proyectos");
   const [showWalletConnectionModal, setShowWalletConnectionModal] =
     useState(false);
+  const [coverImage, setCoverImage] = useState(null);
+  const coverInputRef = useRef(null);
+  const handleCoverImageUploadClick = (event) => {
+    coverInputRef.current.click();
+  };
 
-  const { userProfile } = useStore();
+  const userProfile = useUserStore((state) => state.userProfile);
   const handleTabChange = (tab) => {
     setCurrentTab(tab);
   };
@@ -40,8 +40,31 @@ const Profile = () => {
     setShowWalletConnectionModal(state);
   };
 
+  const handleCoverImageChange = (event) => {
+    const coverImage = event.target.files[0];
+
+    if (!coverImage.type.startsWith("image/")) {
+      alert("Por favor selecciona una imagen válida");
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setCoverImage(reader.result);
+    };
+
+    reader.readAsDataURL(coverImage);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    localStorage.setItem("test", "testItem");
+    console.log(localStorage);
+
+    console.log(
+      userProfile ? localStorage.getItem("user") : "No storage found"
+    );
   }, []);
 
   return (
@@ -87,33 +110,50 @@ const Profile = () => {
           </p>
         </span>
       </div>
-      <div className="flex absolute bottom-0 z-10 w-full h-fit">
-        <Footer />
-      </div>
 
-      <div className="marketplaceOverlay z-10 flex w-full min-h-screen">
-        <div className="flex-1 flex flex-col mx-auto w-full max-w-[1600px] mb-[100vh] mt-[90px] md:mt-[100px] md:mb-[400px] md:px-16 min-h-screen font-['Sen']">
+      <div className="marketplaceOverlay z-10 flex flex-col gap-24 w-full min-h-screen">
+        <div className="flex-1 flex flex-col mx-auto w-full max-w-[1600px]  mt-[90px] md:mt-[100px] md:px-16 min-h-screen font-['Sen']">
           {currentTab != "Editar perfil" ? (
             <div className="flex w-[100vw] md:w-full md:h-[434px] h-[400px] relative">
-              <img
-                src="https://wallpaperaccess.com/full/38582.jpg"
-                alt=""
-                className="brightness-60 object-cover w-full md:h-[434px] h-[400px]"
-              />
+              {userProfile?.coverImage ? (
+                <img
+                  src={userProfile.coverImage}
+                  alt="cover-image"
+                  className="brightness-60 object-cover w-full md:h-[434px] h-[400px]"
+                />
+              ) : (
+                <img
+                  src="https://wallpaperaccess.com/full/38582.jpg"
+                  alt="alt-cover-image"
+                  className="brightness-60 object-cover w-full md:h-[434px] h-[400px]"
+                />
+              )}
 
               <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full">
                 <div className="flex flex-col items-center justify-center mt-[50px]">
-                  <img
-                    src="https://images.unsplash.com/photo-1583864697784-a0efc8379f70?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bWFsZSUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
-                    alt=""
-                    className="rounded-full h-[130px] w-[130px] object-cover"
-                  />
+                  {userProfile.profileImage ? (
+                    <img
+                      src={userProfile.profileImage}
+                      alt=""
+                      className="rounded-full h-[130px] w-[130px] object-cover"
+                    />
+                  ) : (
+                    <img
+                      src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png"
+                      alt=""
+                      className="rounded-full h-[130px] w-[130px] object-cover"
+                    />
+                  )}
                   <div className="flex flex-col items-center justify-center gap-1 bg-[#01070E80] md:w-[533px] w-[90%] md:h-[184px] h-fit mt-[30px] rounded-lg text-white p-3">
                     <h2 className="md:text-[25px] text-[20px] font-bold">
-                      {userProfile.name}
+                      {userProfile?.firstName
+                        ? userProfile.firstName
+                        : "Edddy Bowie .Jr"}
                     </h2>
                     <p className="md:text-[20px] text-[15px]">
-                      {userProfile.email}
+                      {userProfile?.email
+                        ? userProfile.email
+                        : "djeddyedward@gmail.com"}
                     </p>
                     <p className="text-slate-300 text-[13px] mt-[20px]">
                       Balance
@@ -132,14 +172,38 @@ const Profile = () => {
             </div>
           ) : (
             <div className="flex w-[100vw] md:w-full md:h-[434px] h-[400px] relative">
-              <img
-                src="https://wallpaperaccess.com/full/38582.jpg"
-                alt=""
-                className="brightness-60 object-cover w-full md:h-[434px] h-[400px] brightness-50"
-              />
+              {userProfile?.coverImage ? (
+                <img
+                  src={userProfile.coverImage}
+                  alt=""
+                  className="brightness-60 object-cover w-full md:h-[434px] h-[400px] brightness-50"
+                />
+              ) : coverImage ? (
+                <img
+                  src={coverImage}
+                  alt=""
+                  className="brightness-60 object-cover w-full md:h-[434px] h-[400px] brightness-50"
+                />
+              ) : (
+                <img
+                  src="https://wallpaperaccess.com/full/38582.jpg"
+                  alt=""
+                  className="brightness-60 object-cover w-full md:h-[434px] h-[400px] brightness-50"
+                />
+              )}
 
               <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full flex items-center justify-center">
-                <div className="flex flex-row gap-2 items-center justify-center">
+                <div
+                  className="flex flex-row gap-2 items-center justify-center"
+                  onClick={handleCoverImageUploadClick}
+                >
+                  <input
+                    type="file"
+                    ref={coverInputRef}
+                    style={{ display: "none" }}
+                    onChange={handleCoverImageChange}
+                    accept="image/*"
+                  />
                   <p className="text-white hover:cursor-pointer">
                     {" "}
                     Cambiar portada{" "}
@@ -153,14 +217,14 @@ const Profile = () => {
           )}
 
           <div className="flex flex-col w-full mt-[20px] py-4 font-jakarta">
-            <div className="carousel hidden md:flex flex-row md:gap-16 md:justify-start">
+            <div className="carousel px-4 md:px-0 flex flex-row gap-[40px] md:gap-16 md:justify-start">
               {userProfileOptions[0].map((item) => (
                 <p
-                  className={`font-epilogue text-[17px] leading-[22px] dark:text-white text-black cursor-pointer transition ease-in-out duration-200 ${
+                  className={`font-epilogue text-[17px] leading-[22px] cursor-pointer transition ease-in-out duration-200 whitespace-nowrap ${
                     currentTab === item ||
                     (typeof item === "function" && item(27) === currentTab)
                       ? "text-[#18A5FF] border-b-[1px] border-[#18A5FF] hover:text-[#18A5FF] hover:opacity-100 font-semibold"
-                      : "hover:text-[#18A5FF] hover:opacity-60"
+                      : "hover:text-[#18A5FF] hover:opacity-60 text-black"
                   }`}
                   onClick={() => {
                     if (typeof item === "function") {
@@ -195,11 +259,14 @@ const Profile = () => {
             )}
             {(currentTab === "Balance y movimientos" ||
               currentTab === "Movimientos") && <Movements />}
-            {currentTab === "Editar perfil" && <ProfileInfo />}
+            {currentTab === "Editar perfil" && (
+              <ProfileInfo coverImage={coverImage} />
+            )}
 
             {currentTab.includes("27") && <Saved amount="27" />}
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );

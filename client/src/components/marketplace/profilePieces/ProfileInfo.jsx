@@ -1,6 +1,6 @@
-import React from "react";
-import useStore from "../../../context";
-
+// Global imports
+import React, { useState, useRef, useEffect } from "react";
+import imageCompression from "browser-image-compression";
 import {
   AiOutlineUser as UserIcon,
   AiOutlineMail as EmailIcon,
@@ -9,8 +9,75 @@ import {
 import { FiEdit as EditIcon } from "react-icons/fi";
 import { CiLocationOn as LocationIcon } from "react-icons/ci";
 
-const ProfileInfo = () => {
-  const { userProfile } = useStore();
+// Local imports
+import useUserStore from "../../../context/useUserStore";
+import useAuthStore from "../../../context/useAuthStore";
+import { userConnection } from "../../../api/server";
+
+const ProfileInfo = ({ coverImage }) => {
+  const { userProfile, updateUser } = useUserStore();
+  const { auth } = useAuthStore();
+  const { getUser, updateUserById, uploadDocumentFile } = userConnection();
+  const [selectedProfileImage, setSelectedProfileImage] = useState(null);
+  const [imageForm, setImageForm] = useState(null);
+  const [selectedCoverImage, setSelectedCoverImage] = useState(null);
+
+  const locationInputRef = useRef(null);
+  const profileInputRef = useRef(null);
+
+  const handleProfileImageUploadClick = (event) => {
+    profileInputRef.current.click();
+  };
+
+  const handleProfileImageChange = async (event) => {
+    const profileImage = event.target.files[0];
+
+    if (!profileImage.type.startsWith("image/")) {
+      alert("Por favor selecciona una imagen válida");
+      return;
+    }
+
+    try {
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      };
+      const compressedFile = await imageCompression(profileImage, options);
+      const formData = new FormData();
+      const reader = new FileReader();
+
+      reader.readAsDataURL(compressedFile);
+
+      reader.onloadend = () => {
+        setSelectedProfileImage(reader.result);
+        formData.append("file1", reader.result);
+        setImageForm(formData);
+      };
+    } catch (error) {
+      console.error("Error compressing the image: ", error);
+    }
+  };
+
+  useEffect(() => {
+    if (coverImage) {
+      setSelectedCoverImage(coverImage);
+    }
+  }, [coverImage]);
+
+  const handleProfileUpdate = async () => {
+    let updateValues = {};
+
+    if (selectedProfileImage) {
+      updateValues.profilePhoto = selectedProfileImage;
+      //updateUser("profileImage", selectedProfileImage);
+    }
+
+    await uploadDocumentFile(updateValues?.profilePhoto);
+    //await updateUserById(auth.userId, updateValues, auth.accessToken);
+    //await getUser(auth.userId, auth.accessToken);
+  };
+
   return (
     <div className="flex flex-col flex-1 items-start justify-center w-full">
       <h2 className="p-4 text-[30px] text-black dark:text-white font-bold">
@@ -18,13 +85,37 @@ const ProfileInfo = () => {
       </h2>
       <div className="flex-row gap-12 md:items-start items-center md:justify-start justify-center w-full mt-[20px] md:flex hidden">
         <div className="w-fit h-fit relative">
-          <img
-            src="https://images.unsplash.com/photo-1583864697784-a0efc8379f70?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bWFsZSUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
-            alt=""
-            className="rounded-full h-[140px] w-[140px] object-cover brightness-50"
-          />
+          {userProfile.profileImage && !selectedProfileImage ? (
+            <img
+              src={userProfile.profileImage}
+              alt="profile-image"
+              className="rounded-full h-[140px] w-[140px] object-cover brightness-50"
+            />
+          ) : selectedProfileImage ? (
+            <img
+              src={selectedProfileImage}
+              alt="alt-profile-image"
+              className="rounded-full h-[140px] w-[140px] object-cover brightness-50"
+            />
+          ) : (
+            <img
+              src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png"
+              alt="alt-profile-image"
+              className="rounded-full h-[140px] w-[140px] object-cover brightness-50"
+            />
+          )}
           <div className="flex flex-col items-center justify-center absolute left-0 top-0 right-0 bottom-0 ">
-            <div className="w-fit h-fit flex- items-center justify-center hover:cursor-pointer">
+            <div
+              className="w-fit h-fit flex flex-col items-center justify-center hover:cursor-pointer"
+              onClick={handleProfileImageUploadClick}
+            >
+              <input
+                type="file"
+                ref={profileInputRef}
+                style={{ display: "none" }}
+                onChange={handleProfileImageChange}
+                accept="image/*"
+              />
               <span className="text-white text-[18px] flex items-center justify-center">
                 <EditIcon />
               </span>
@@ -73,7 +164,10 @@ const ProfileInfo = () => {
               </p>
             </div>
 
-            <p className="text-[#18A5FF] hover:underline cursor-pointer pt-[17px] text-[18px]">
+            <p
+              className="text-[#18A5FF] hover:underline cursor-pointer pt-[17px] text-[18px]"
+              onClick={handleProfileUpdate}
+            >
               {" "}
               Guardar cambios{" "}
             </p>
@@ -83,17 +177,24 @@ const ProfileInfo = () => {
             <input
               type="text"
               className="ml-[100px] text-black dark:text-white bg-transparent outline-none border-0 border-b-[1px] w-[300px] font-bold focus:outline-none focus:ring-0 placeholder:text-black"
-              placeholder={`${userProfile.name}`}
+              placeholder={`${userProfile.firstName} ${userProfile.lastName}`}
+              readOnly
             />
             <input
               type="text"
               className="ml-[100px] text-black dark:text-white bg-transparent outline-none border-0 border-b-[1px] w-[300px] font-bold focus:outline-none focus:ring-0 placeholder:text-black"
               placeholder={`${userProfile.email}`}
+              readOnly
             />
             <input
+              ref={locationInputRef}
               type="text"
               className="ml-[100px] text-black dark:text-white bg-transparent outline-none border-0 border-b-[1px] w-[300px] font-bold focus:outline-none focus:ring-0 placeholder:text-black"
-              placeholder={`${userProfile.addressStreet}`}
+              placeholder={`${
+                userProfile?.addressStreet
+                  ? userProfile.addressStreet
+                  : "No registrado"
+              }`}
             />
             <p className="text-[#18A5FF] hover:underline cursor-pointer pt-[17px]">
               {" "}

@@ -8,7 +8,7 @@ const Overlay = ({ children, styles }) => {
   };
   return (
     <motion.div
-      className={`overlay ${styles}`}
+      className={`overlay md:pt-[70px] ${styles}`}
       variants={variants}
       initial={"closed"}
       exit={"closed"}

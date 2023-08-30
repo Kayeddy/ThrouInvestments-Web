@@ -44,7 +44,7 @@ const OtpInput = ({ index, onFocus, onBlur, focusedInput }) => {
 
 const PasswordRecovery = ({ handleSection, handleModal }) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [focusedInput, setFocusedInput] = useState(0);
 
   const handleFocus = (index) => {
@@ -98,7 +98,7 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
   };
 
   return (
-    <div className="w-full md:h-full h-screen bg-white overflow-hidden relative">
+    <div className="md:min-w-[750px] md:w-[80vw] md:max-w-[950px] md:h-[550px] w-screen h-screen bg-white overflow-hidden relative">
       <div className="absolute flex flex-col items-center gap-4 w-full h-full py-10 z-10 mx-auto">
         <header className="flex flex-row gap-4 items-center justify-center w-full mt-[70px] md:mt-0">
           <span
@@ -110,15 +110,24 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
             chevron_left
           </span>
 
+          <span
+            className={`material-symbols-outlined text-[#B5B5B5] md:flex hidden absolute md:top-[10%] xl:top-[9%] right-[10%] items-center justify-center cursor-pointer ${
+              currentStep === 4 && "w-fit pl-10"
+            }`}
+            onClick={() => handleModal(false)}
+          >
+            cancel
+          </span>
+
           {currentStep !== 4 && (
-            <div className="w-full flex flex-row items-cneter justify-center">
+            <div className="w-full md:w-fit h-fit flex flex-row items-center justify-center relative mt-4 md:mt-0">
               <span
-                className="material-symbols-outlined text-[#B5B5B5] flex md:hidden items-center justify-center cursor-pointer text-[35px]"
+                className="material-symbols-outlined w-fit h-fit p-1 text-[#B5B5B5] flex md:hidden items-center justify-center cursor-pointer text-[35px] absolute top-[-40px] left-2"
                 onClick={() => handleSection(1)}
               >
                 chevron_left
               </span>
-              <h2 className="md:text-[35px] text-[30px] text-[#062147] font-semibold">
+              <h2 className="md:text-[35px] text-[30px] text-[#062147] font-semibold text-center md:text-left absolute md:relative w-[80%] md:w-fit">
                 Recuperación de contraseña
               </h2>
             </div>
@@ -128,7 +137,7 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
         <div className="flex flex-col px-4 md:px-0 h-full">
           {/** Sub recovery section 1 */}
           {currentStep === 1 && (
-            <section className="w-full h-full flex flex-col items-center justify-between gap-8 p-4 md:p-0 font-jakarta">
+            <section className="w-full h-full flex flex-col items-center justify-between gap-8 p-4 pt-[30px] md:p-0 md:pt-0 font-jakarta">
               <div className="flex items-start justify-start flex-col w-full h-fit">
                 <div className="flex flex-col items-center justify-center gap-4 w-full">
                   <p className="font-jakarta md:text-[17.2px] text-[18px] text-[#062147] text-center">
@@ -157,7 +166,7 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
               <div className="flex w-full h-fit justify-center items-center">
                 <div
                   id="Email-container"
-                  className="relative w-[85%] flex flex-row items-center border-b-[2px] border-[#18A5FF]"
+                  className="relative w-[95%] md:w-[85%] flex flex-row items-center border-b-[2px] border-[#18A5FF]"
                 >
                   <span
                     className="material-symbols-outlined cursor-pointer text-[#18A5FF] md:ml-6"
@@ -170,14 +179,13 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
                     type="text"
                     className="w-full sm:px-[20px] font-normal font-Plus_Jakarta_Sans outline-none border-transparent focus:border-transparent focus:ring-0 bg-transparent font-epilogue dark:text-white text-[#01070E] text-[20px] leading-[30px] placeholder:text-[#4b5264]"
                     placeholder="Email"
-                    value="sheddagame@gmail.com"
                   />
                 </div>
               </div>
 
               <div className="w-full flex items-center justify-center">
                 <button
-                  className="w-[85%] text-[25px] bg-[#062147] hover:bg-[#18A5FF] py-1.5 text-white flex items-center justify-center font-['Sen'] feont-semibold"
+                  className="w-full text-[25px] bg-[#062147] hover:bg-[#18A5FF] py-2.5 text-white flex items-center justify-center font-['Sen'] feont-semibold"
                   onClick={() => setCurrentStep(2)}
                 >
                   {" "}
@@ -189,7 +197,7 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
 
           {/** Sub recovery section 2 */}
           {currentStep === 2 && (
-            <section className="w-full h-full flex flex-col items-center justify-between gap-8 font-jakarta">
+            <section className="w-full h-full flex flex-col items-center justify-between gap-8 p-4 pt-[30px] md:p-0 md:pt-0 font-jakarta">
               <div className="flex flex-col gap-4">
                 <p className="font-jakarta md:text-[17.2px] text-[18px] text-[#062147] text-center ">
                   {" "}
@@ -251,13 +259,8 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
 
           {/** Sub recovery section 3 */}
           {currentStep === 3 && (
-            <section className="w-full h-full flex flex-col items-center justify-between p-4 md:p-0 font-jakarta">
+            <section className="w-full h-full flex flex-col items-center justify-between p-4 pt-[30px] md:p-0 md:pt-0 font-jakarta">
               <div className="flex flex-col gap-4">
-                <p className="font-jakarta text-[17.2px] text-[#062147] text-center mt-1">
-                  {" "}
-                  Genial! Escribe una una contraseña nueva.{" "}
-                </p>
-
                 <div className="flex flex-row justify-center items-center gap-4">
                   <p className=" text-[18px] text-[#B5B5B5]">1</p>
                   <div className="h-[1px] md:w-[190px] w-[100px] bg-[#B5B5B5]" />
@@ -266,12 +269,12 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
                   <p className="text-[#18A5FF] text-[18px]">3</p>
                 </div>
 
-                <p className="text-[20px] font-Plus_Jakarta_Sans text-[#18A5FF] text-center  font-semibold">
+                <p className="text-[17px] md:text-[20px] font-Plus_Jakarta_Sans text-[#18A5FF] text-center  font-semibold">
                   Genial! Ingresa la nueva contraseña.
                 </p>
               </div>
 
-              <div className="flex flex-col items-center justify-center gap-8 w-[90%]">
+              <div className="flex flex-col items-center justify-center gap-8 w-[95%]">
                 <div
                   id="Password-container"
                   className="relative w-full flex flex-row items-center border-b-[2px]"
@@ -284,7 +287,7 @@ const PasswordRecovery = ({ handleSection, handleModal }) => {
                   </span>
                   <input
                     id="Password-input"
-                    type="text"
+                    type="password"
                     className="w-full sm:px-[20px] font-normal font-Plus_Jakarta_Sans outline-none border-transparent focus:border-transparent focus:ring-0 bg-transparent font-epilogue dark:text-white text-[#01070E] text-[20px] leading-[30px] placeholder:text-[#4b5264]"
                     placeholder="Contraseña"
                     onFocus={(e) => highlightField(e.target.id)}

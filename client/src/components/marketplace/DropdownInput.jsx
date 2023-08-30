@@ -12,20 +12,33 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const DropdownInput = ({ options, switchTab, style, optionalTitle }) => {
+const DropdownInput = ({
+  options,
+  switchTab,
+  style,
+  optionalTitle,
+  titleStyle,
+  arrowStyle,
+}) => {
   const [title, setTitle] = useState(options[0]);
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative inline-block text-left select-none">
       <div>
-        <Menu.Button className="inline-flex justify-center items-center w-full py-2 text-md font-medium text-[#062147] bg-transparent rounded-md focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-offset-transparent">
+        <Menu.Button className="inline-flex justify-center items-center w-full py-2 text-[#062147] bg-transparent rounded-md focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-offset-transparent">
           {style ? (
             <div className={`${style}`}>{title}</div>
           ) : (
-            <div className="flex items-center">{optionalTitle}</div>
+            <div className={`flex items-center ${titleStyle}`}>
+              {optionalTitle}
+            </div>
           )}
 
           {style && (
-            <div className="dark:text-white text-white">
+            <div
+              className={`dark:text-white  ${
+                arrowStyle ? arrowStyle : "text-white"
+              }`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-5 h-5 ml-2 -mr-1"

@@ -62,7 +62,7 @@ const Perks = () => {
   ];
 
   return (
-    <div className="mb-[1000px] md:mb-[1100px] lg:mb-[800px] xl:mb-[750px] flex h-fit md:h-screen w-full flex-grow flex-col items-center justify-start px-[7%]">
+    <div className="flex min-h-max h-fit w-full flex-grow flex-col items-center justify-start px-[7%] my-12 md:my-0">
       <h1 className="text-center text-[35px] font-bold text-[#062147] md:text-[38px] xl:text-[45px]">
         ¿Cómo lo Hacemos Posible?
       </h1>

@@ -16,7 +16,12 @@ const store = (set) => ({
     },
   ],
   projects: [],
-  isRegistering: false,
+  isRegistering: {
+    loading: false,
+    success: undefined,
+    error: undefined,
+    Method: undefined,
+  },
   accessToken: "",
   auth: {},
   walletAddress: null,
@@ -62,6 +67,7 @@ const store = (set) => ({
         notifications: [...state.notifications, notification],
       };
     }),
+
   removeNotification: (id) =>
     set((state) => ({
       notifications: state.notifications.filter((n) => n.id !== id),

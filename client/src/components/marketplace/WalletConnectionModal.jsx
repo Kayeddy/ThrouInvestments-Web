@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { Coinbase, Metamask, Phantom, WalletConnect } from "../../assets";
 import { handleWalletConnection } from "../../api/wallet";
-import useStore from "../../context";
+import useUserStore from "../../context/useUserStore";
 
 const Option = ({ src, alt, handleClick }) => (
   <div
@@ -23,7 +23,7 @@ const Option = ({ src, alt, handleClick }) => (
 );
 
 const WalletConnectionModal = ({ handleShowModal }) => {
-  const state = useStore();
+  const { wallet } = useUserStore();
   const {
     connectMetamask,
     connectPhantom,
@@ -43,10 +43,10 @@ const WalletConnectionModal = ({ handleShowModal }) => {
   ];
 
   useEffect(() => {
-    if (state.walletAddress) {
+    if (wallet.address) {
       handleShowModal(false);
     }
-  }, [state.walletAddress]);
+  }, [wallet.address]);
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-50">

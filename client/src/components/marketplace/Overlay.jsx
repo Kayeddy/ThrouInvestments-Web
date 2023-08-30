@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 
 const Overlay = ({ children, styles }) => {
   const variants = {
-    open: { backgroundColor: "rgba(0,0,0,0.6)" },
+    open: { backgroundColor: "rgba(0,0,0,0.1)" },
     closed: { backgroundColor: "rgba(0,0,0,0.0)" },
   };
   return (
     <motion.div
-      className={`overlay ${styles}`}
+      className={`overlay md:pt-[70px] ${styles}`}
       variants={variants}
       initial={"closed"}
       exit={"closed"}

@@ -157,6 +157,26 @@ import Exterior_1 from "./Test_projects/SHOJI/Exterior/Exterior_1.jpg";
 import Exterior_2 from "./Test_projects/SHOJI/Exterior/Exterior_2.jpg";
 import Exterior_3 from "./Test_projects/SHOJI/Exterior/Exterior_3.jpg";
 import Exterior_4 from "./Test_projects/SHOJI/Exterior/Exterior_4.jpg";
+import Exterior_5 from "./Test_projects/SHOJI/Exterior/Exterior_5.jpg";
+import Exterior_6 from "./Test_projects/SHOJI/Exterior/Exterior_6.jpg";
+import Exterior_7 from "./Test_projects/SHOJI/Exterior/Exterior_7.jpg";
+import Exterior_8 from "./Test_projects/SHOJI/Exterior/Exterior_8.jpg";
+import Exterior_9 from "./Test_projects/SHOJI/Exterior/Exterior_9.jpg";
+import Exterior_10 from "./Test_projects/SHOJI/Exterior/Exterior_10.jpg";
+import Exterior_11 from "./Test_projects/SHOJI/Exterior/Exterior_11.jpg";
+import Exterior_12 from "./Test_projects/SHOJI/Exterior/Exterior_12.jpg";
+import Exterior_13 from "./Test_projects/SHOJI/Exterior/Exterior_13.jpg";
+import Exterior_14 from "./Test_projects/SHOJI/Exterior/Exterior_14.jpg";
+import Exterior_15 from "./Test_projects/SHOJI/Exterior/Exterior_15.jpg";
+import Exterior_16 from "./Test_projects/SHOJI/Exterior/Exterior_16.jpg";
+import Exterior_17 from "./Test_projects/SHOJI/Exterior/Exterior_17.jpg";
+import Exterior_18 from "./Test_projects/SHOJI/Exterior/Exterior_18.jpg";
+import Exterior_19 from "./Test_projects/SHOJI/Exterior/Exterior_19.jpg";
+import Exterior_20 from "./Test_projects/SHOJI/Exterior/Exterior_20.jpg";
+import Exterior_21 from "./Test_projects/SHOJI/Exterior/Exterior_21.jpg";
+import Exterior_22 from "./Test_projects/SHOJI/Exterior/Exterior_22.jpg";
+import Exterior_23 from "./Test_projects/SHOJI/Exterior/Exterior_23.jpg";
+import Exterior_24 from "./Test_projects/SHOJI/Exterior/Exterior_24.jpg";
 
 export {
   tagType,
@@ -312,4 +332,24 @@ export {
   Exterior_2,
   Exterior_3,
   Exterior_4,
+  Exterior_5,
+  Exterior_6,
+  Exterior_7,
+  Exterior_8,
+  Exterior_9,
+  Exterior_10,
+  Exterior_11,
+  Exterior_12,
+  Exterior_13,
+  Exterior_14,
+  Exterior_15,
+  Exterior_16,
+  Exterior_17,
+  Exterior_18,
+  Exterior_19,
+  Exterior_20,
+  Exterior_21,
+  Exterior_22,
+  Exterior_23,
+  Exterior_24,
 };

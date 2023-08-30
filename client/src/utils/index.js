@@ -1,29 +1,24 @@
 import { json } from "react-router-dom";
 import { changeTheme } from "../constants";
+import useUserStore from "../context/useUserStore";
 
 // Function that handles the different themes users can choose from
 export const handleThemeChange = () => {
-  return {
-    checkTheme: () => {
-      const theme = localStorage.getItem("theme");
-      if (theme === "dark") {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    toggleTheme: (theme) => {
-      localStorage.setItem("theme", theme);
-      const body = document.querySelector("body");
-      body.classList.toggle(theme);
-      const currentTheme = document.body.classList.contains("dark");
-      if (currentTheme) {
-        changeTheme("dark");
-      } else {
-        changeTheme("light");
-      }
-    },
-  };
+  const { userPreferences, updateUserPreferences } = useUserStore();
+  const body = document.querySelector("body");
+
+  // Determine the current theme
+  const currentTheme = userPreferences.theme;
+
+  // Toggle to the other theme
+  const newTheme = currentTheme === "light" ? "dark" : "light";
+
+  // Update the user preferences to reflect the change
+  updateUserPreferences("theme", newTheme);
+
+  // Apply the theme change to the body
+  body.setAttribute("data-theme", newTheme);
+  console.log("Theme changed, current theme is: ", userPreferences.theme);
 };
 
 // This function is used to calculate the percentage bar, based on the investment goal and the amount raised so far.

@@ -1,9 +1,9 @@
 // Global imports
-import { useContract, useContractRead } from "@thirdweb-dev/react";
+import Web3 from "web3";
 
 // Local imports
 import { convertRetrievedProjects } from "../utils";
-import useStore from "../context/index";
+import useProjectStore from "../context/useProjectStore";
 
 const handleProjectsRetrieval = () => {
   // Necessary hooks imports -------------------------------------------------------------------------
@@ -14,7 +14,7 @@ const handleProjectsRetrieval = () => {
 
   const { data: projectsCount } = useContractRead(contract, "totalProjects");
 
-  const { assignProjects } = useStore();
+  const { assignProjects } = useProjectStore();
 
   //---------------------------------------------------------------------------
 

@@ -1,61 +1,102 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { AiOutlinePlus as PlusIcon } from "react-icons/ai";
-import { mdiAccount } from "@mdi/js";
-import { ReactSVG } from "react-svg";
+import { ConnectKitButton } from "connectkit";
 
-import useStore from "../../context";
+import { BsBookmark as BookmarkIcon } from "react-icons/bs";
+import { FaRegBookmark as NavBookmarkIcon } from "react-icons/fa";
+import { MdOutlineMenuBook as LearnIcon } from "react-icons/md";
+import { BiHelpCircle as HelpIcon } from "react-icons/bi";
+import { AiOutlineSearch as SearchIcon } from "react-icons/ai";
 
-import { CustomButton, Overlay, DropdownInput } from "../marketplace";
+import useUserStore from "../../context/useUserStore";
+import useInAppNotificationStore from "../../context/useInAppNotificationStore";
+import useNotificationStore from "../../context/useNotificationStore";
+
+import { DropdownInput } from "../marketplace";
 import {
-  search,
-  User_add_icon,
-  User_profile_icon,
-  User_notifications_icon,
-  Throu_sm_dark,
   Twitter_mobile,
   Facebook_mobile,
   Instagram_mobile,
   Discord_mobile,
-  Theme_light_icon,
-  Theme_dark_icon,
-  Instagram_icon_light,
-  Twitter_icon_light,
-  Facebook_icon_light,
-  Discord_icon_light,
-  Logout,
-  Logout_icon_dark,
   Throu_sm,
-  ProfileIcon,
 } from "../../assets";
 import { MdLogout } from "react-icons/md";
-import { mobileDrawerlinks } from "../../constants";
+
 import { handleThemeChange } from "../../utils";
+import { useWalletManagementHook } from "../../hooks/UseWalletManagementHook";
 
 const Navbar = ({ handleWalletModal }) => {
   const navigate = useNavigate();
-  const state = useStore();
+  const { userProfile, removeUser, wallet, updateWallet } = useUserStore();
+  useWalletManagementHook();
+
+  const notifications = useNotificationStore((state) => state.notifications);
+  const openModal = useInAppNotificationStore((state) => state.openModal);
 
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const [navBlur, setNavBlur] = useState(true);
 
-  const handleNavBlur = () => {
-    window.addEventListener("scroll", () => {
-      window.scrollY > 30 ? setNavBlur(true) : setNavBlur(false);
-    });
-  };
+  const socialMediaLinks = [
+    {
+      src: Instagram_mobile,
+      alt: "Instagram account icon",
+      style: "w-[20px] h-[20px]",
+    },
+    {
+      src: Twitter_mobile,
+      alt: "Twitter account icon",
+      style: "w-[20px] h-[20px]",
+    },
+    {
+      src: Facebook_mobile,
+      alt: "Facebook account icon",
+      style: "w-[11px] h-[20px]",
+    },
+    {
+      src: Discord_mobile,
+      alt: "Discord account icon",
+      style: "w-[20px] h-[20px]",
+    },
+  ];
 
-  const changeTheme = handleThemeChange();
-  const address = "";
-  const genericHamburgerLine =
-    "h-1 w-[33px] my-1 rounded-full dark:bg-white bg-[#062147] transition ease transform duration-300";
+  const navbarLinks = [
+    {
+      title: "Guardado",
+      icon: <NavBookmarkIcon />,
+      onClick: () => {
+        handleRegistrationModal(false);
+        navigate("/marketplace");
+      },
+    },
+    {
+      title: "Aprender",
+      icon: <LearnIcon />,
+
+      onClick: () => {
+        handleRegistrationModal(false);
+        navigate("/nosotros");
+      },
+    },
+    {
+      title: "Soporte y ayuda",
+      icon: <HelpIcon />,
+      onClick: () => {
+        handleRegistrationModal(false);
+        navigate("/aprende");
+      },
+    },
+  ];
 
   const handleInvestButton = () => {};
+
   const handleTabChange = () => {};
   const handleLogout = () => {
     navigate("/");
-    state.addUser(null);
+    removeUser();
+    updateWallet("address", null);
+    updateWallet("name", null);
+    updateWallet("balance", null);
   };
 
   const NavigationOptions = {
@@ -78,13 +119,8 @@ const Navbar = ({ handleWalletModal }) => {
         </span>
         <p>Guardados</p>
       </div>,
-      <div className="flex flex-row gap-2">
-        <span
-          className="material-symbols-outlined text-[#062147]"
-          handleClick={() => {
-            changeTheme.toggleTheme("dark");
-          }}
-        >
+      <div className="flex flex-row gap-2" onClick={handleThemeChange}>
+        <span className="material-symbols-outlined text-[#062147]">
           dark_mode
         </span>
         <p>Tema</p>
@@ -94,8 +130,8 @@ const Navbar = ({ handleWalletModal }) => {
         <p className="text-[#AA1010]">Cerrar sesion</p>
       </div>,
     ],
-    notifications: state.notifications
-      ? state.notifications.map((item) => (
+    notifications: notifications
+      ? notifications.map((item) => (
           <div
             key={item.id}
             className="flex flex-col justify-start items-start w-full h-fit p-2 gap-2 border-b-2"
@@ -110,17 +146,12 @@ const Navbar = ({ handleWalletModal }) => {
 
   const navigationBarRef = useRef(null);
 
-  const handleOutsideClick = (event) => {
-    if (
-      navigationBarRef.current &&
-      !navigationBarRef.current.contains(event.target)
-    ) {
-      setToggleDrawer(false);
-    }
-  };
-
   const handleScroll = () => {
     setToggleDrawer(false);
+  };
+
+  const handleToggleDrawer = () => {
+    setToggleDrawer((prev) => !prev);
   };
 
   const Icon = ({ imgUrl, handleClick }) => (
@@ -137,250 +168,302 @@ const Navbar = ({ handleWalletModal }) => {
   );
 
   useEffect(() => {
-    setNavBlur(false);
-    handleNavBlur();
-    window.removeEventListener("click", handleOutsideClick);
-    window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
-    <div className="flex flex-row justify-between gap-6 items-center dark:bg-[#01070E80] bg-[#F7FAFF80] backdrop-blur-xl w-full z-100 font-sen">
-      <div
-        className={`hidden flex-row items-center justify-between md:flex md:px-8 lg:px-8 lg:pr-[50px]  w-full gap-8 max-w-[1600px] mx-auto transition-all ease-in-out duration-200 ${
-          !navBlur ? "h-[90px]" : "h-[60px]"
-        }`}
-      >
+    <>
+      {/* Desktop Navbar */}
+      <nav className="flex flex-row justify-between gap-6 items-center dark:bg-[#01070E80] bg-[#F7FAFF80] backdrop-blur-xl w-full font-sen">
         <div
-          className="w-[72px] h-full rounded-[20px] text-[#4b5264] bg-transparent flex justify-end items-center cursor-pointer"
-          onClick={() => navigate("/")}
+          className={`hidden flex-row items-center justify-between md:flex md:px-8 lg:px-8 lg:pr-[50px]  w-full gap-8 max-w-[1600px] mx-auto transition-all ease-in-out duration-200 ${
+            !navBlur ? "h-[90px]" : "h-[60px]"
+          }`}
         >
-          <img src={Throu_sm} alt="search" className="w-[50px] h-[50px]" />
-        </div>
-
-        <div className="flex justify-center items-center">
-          <div className="w-full flex flex-row justify-start gap-12 items-center">
-            <DropdownInput
-              options={NavigationOptions.proyectos}
-              switchTab={handleTabChange}
-              style="hover:underline hover:text-[#18A5FF]"
-            />
-
-            <DropdownInput
-              options={NavigationOptions.nostros}
-              switchTab={handleTabChange}
-              style="hover:underline hover:text-[#18A5FF]"
-            />
-
-            <DropdownInput
-              options={NavigationOptions.aprende}
-              switchTab={handleTabChange}
-              style="hover:underline hover:text-[#18A5FF]"
-            />
-
-            <span className="material-symbols-outlined text-[#062147] cursor-pointer">
-              search
-            </span>
+          <div
+            className="w-[72px] h-full rounded-[20px] text-[#4b5264] bg-transparent flex justify-end items-center cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <img src={Throu_sm} alt="search" className="w-[50px] h-[50px]" />
           </div>
-        </div>
 
-        <div className="flex flex-row items-center justify-center gap-4">
-          {state.walletAddress ? (
-            <div className="flex flex-row gap-2 text-[#062147] dark:text-white mr-4">
-              <span class="material-symbols-outlined translate-y-0.5">
-                account_balance_wallet
+          <div className="flex justify-center items-center">
+            <div className="w-full flex flex-row justify-start gap-12 items-center">
+              <p
+                className="font-sen text-[20px] text-[#062147] hover:underline hover:text-[#18A5FF] cursor-pointer transition-all duration-300"
+                onClick={() => navigate("/marketplace")}
+              >
+                Proyectos
+              </p>
+              <p
+                className="font-sen text-[20px] text-[#062147] hover:underline hover:text-[#18A5FF] cursor-pointer transition-all duration-300"
+                onClick={() => navigate("/nosotros")}
+              >
+                Nosotros
+              </p>
+
+              <p
+                className="font-sen text-[20px] text-[#062147] hover:underline hover:text-[#18A5FF] cursor-pointer transition-all duration-300"
+                onClick={() => navigate("/aprende")}
+              >
+                Aprende
+              </p>
+
+              <span className="material-symbols-outlined text-[#062147] cursor-pointer">
+                search
               </span>
-              <p className="font-sen font-bold text-[18px]"> $342.90 USD </p>
+            </div>
+          </div>
+
+          {userProfile ? (
+            <div className="flex flex-row items-center justify-center gap-4">
+              <ConnectKitButton.Custom>
+                {({
+                  isConnected,
+                  isConnecting,
+                  show,
+                  hide,
+                  address,
+                  ensName,
+                  chain,
+                }) => {
+                  return (
+                    <>
+                      {isConnected ? (
+                        <div
+                          className="flex flex-row gap-2 text-[#062147] dark:text-white mr-4 cursor-pointer"
+                          onClick={show}
+                        >
+                          <span className="material-symbols-outlined translate-y-0.5">
+                            account_balance_wallet
+                          </span>
+                          <p className="font-sen font-bold text-[18px]">
+                            {wallet?.balance} USDT
+                          </p>
+                        </div>
+                      ) : (
+                        <div
+                          className="flex flex-row gap-2 text-[#062147] lg:text-white md:bg-transparent lg:bg-[#062147] dark:text-white lg:mr-4 py-2 lg:px-2 cursor-pointer hover:bg-[#18A5FF] rounded-md"
+                          onClick={show}
+                        >
+                          <span className="material-symbols-outlined translate-y-0.5">
+                            account_balance_wallet
+                          </span>
+                          <p className="font-sen text-[18px] md:hidden lg:block">
+                            {" "}
+                            Conectar wallet{" "}
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  );
+                }}
+              </ConnectKitButton.Custom>
+
+              <DropdownInput
+                options={NavigationOptions.profile}
+                switchTab={handleTabChange}
+                optionalTitle={
+                  <span className="material-symbols-outlined text-[#062147]">
+                    person
+                  </span>
+                }
+              />
+
+              <div className="w-fit h-fit relative">
+                <DropdownInput
+                  options={NavigationOptions.notifications}
+                  switchTab={handleTabChange}
+                  optionalTitle={
+                    <span className="material-symbols-outlined text-[#062147]">
+                      Notifications
+                    </span>
+                  }
+                />
+                <span className="absolute top-[-2px] right-[-5px] h-4 w-4 flex items-center justify-center rounded-[50%] bg-[#18A5FF] text-white text-jakarta text-xs">
+                  {notifications.length}
+                </span>
+              </div>
             </div>
           ) : (
             <div
-              className="flex flex-row gap-2 text-white bg-[#062147] dark:text-white mr-4 py-2 px-2 cursor-pointer hover:bg-[#18A5FF]"
+              className="flex flex-row gap-2 text-[#062147] lg:text-white md:bg-transparent lg:bg-[#062147] dark:text-white lg:mr-4 py-2 px-4 cursor-pointer hover:bg-[#18A5FF] transition-all duration-300"
               onClick={() => handleWalletModal(true)}
             >
-              <span class="material-symbols-outlined translate-y-0.5">
-                account_balance_wallet
-              </span>
-              <p className="font-sen text-[18px]"> Conectar wallet </p>
+              <p className="font-sen text-[18px]">Iniciar sesion</p>
             </div>
           )}
-
-          <DropdownInput
-            options={NavigationOptions.profile}
-            switchTab={handleTabChange}
-            optionalTitle={
-              <span className="material-symbols-outlined text-[#062147]">
-                person
-              </span>
-            }
-          />
-
-          <div className="w-fit h-fit relative">
-            <DropdownInput
-              options={NavigationOptions.notifications}
-              switchTab={handleTabChange}
-              optionalTitle={
-                <span className="material-symbols-outlined text-[#062147]">
-                  Notifications
-                </span>
-              }
-            />
-            <span class="absolute top-[-2px] right-[-5px] h-4 w-4 flex items-center justify-center rounded-[50%] bg-[#18A5FF] text-white text-jakarta text-xs">
-              {state.notifications.length}
-            </span>
-          </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Small screens navigation */}
-
+      {/* Mobile Navbar */}
       <nav
-        className={`w-full h-[90px] flex flex-row justify-between items-center py-[10px] ${
-          toggleDrawer ? " bg-opacity-80" : "bg-transparent"
-        }  backdrop-blur-[100px] 
-             transition-all ease-in-out delay-50 md:hidden relative z-100`}
-        ref={navigationBarRef}
+        className={`w-full h-[90px] fixed top-0 transition-all ease-in-out delay-50 md:hidden z-10`}
       >
-        <Link to="/">
-          <div className="w-[80px] h-[80px] rounded-[10px] bg-transparent flex justify-center items-center cursor-pointer">
+        <div
+          className={`w-full h-full flex flex-row justify-between items-center pt-[10px] pb-[10px] backdrop-blur-[10px] bg-opacity-50 z-20 ${
+            !blur ? "bg-transparent" : "bg-white"
+          }`}
+        >
+          <div
+            className="w-[80px] h-[80px] rounded-[10px] bg-transparent flex justify-center items-center cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             <img
-              src={Throu_sm_dark}
+              src={Throu_sm}
               alt="Small Throu icon"
               className="w-[60%] h-[60%] object-contain"
             />
           </div>
-        </Link>
 
-        <button
-          type="button"
-          className="text-[30px] text-[#06214] mr-[5%] object-contain cursor-pointer z-10"
-          onClick={() => {
-            setToggleDrawer((prev) => !prev);
-          }}
-        >
-          <div
-            className={`${genericHamburgerLine} ${
-              toggleDrawer && "rotate-45 translate-y-2 translate-x-1"
-            }`}
-          />
+          <button
+            type="button"
+            className="text-[30px] text-[#062147] mr-[5%] object-contain cursor-pointer z-10"
+            onClick={handleToggleDrawer}
+            ref={navigationBarRef}
+          >
+            <div
+              className={`h-1 w-[33px] my-1 rounded-full bg-[#062147] transition ease transform duration-300 ${
+                toggleDrawer && "rotate-45 translate-y-2 translate-x-1"
+              }`}
+            />
 
-          <div
-            className={`ml-[12px] ${genericHamburgerLine} ${
-              toggleDrawer
-                ? "-rotate-45 -translate-y-0 -translate-x-2"
-                : "group-hover:opacity-100"
-            }`}
-          />
-        </button>
+            <div
+              className={`ml-[12px] h-1 w-[33px] my-1 rounded-full bg-[#062147] transition ease transform duration-300 ${
+                toggleDrawer
+                  ? "-rotate-45 -translate-y-0 -translate-x-2"
+                  : "group-hover:opacity-100"
+              }`}
+            />
+          </button>
+        </div>
 
         {toggleDrawer && (
-          <motion.div
-            className={`absolute top-[90px] right-0 z-100 py-4 w-full h-fit transition-all duration-200 bg-[#062147] bg-opacity-90 backdrop-blur-[100px]`}
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.01 }}
-          >
-            <div className="flex flex-row justify-center items-center w-[90%] h-[52px] bg-transparent border-b-[1.5px] rounded-sm border-white mx-auto mt-4">
-              <input
-                type="text"
-                placeholder="Buscar proyectos"
-                className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-white text-white bg-transparent outline-none"
-              />
-              <div className="w-[72px] h-full rounded-[20px] text-white bg-transparent flex justify-end items-center cursor-pointer ml-2">
-                <img
-                  src={search}
-                  alt="search"
-                  className="w-[15px] h-[15px] object-contain"
-                />
-              </div>
-            </div>
+          <div className="absolute top-[90.1px] flex items-start justify-center w-fit h-fit z-10 font-sen">
+            <motion.div
+              className={`flex flex-col items-start px-2 gap-[40px] justify-start py-5 w-[100vw] h-fit transition-all duration-200 backdrop-blur-[10px] bg-opacity-50 ${
+                !blur ? "bg-transparent" : "bg-white"
+              }`}
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.01 }}
+            >
+              <div className="w-full flex flex-col items-start justify-start gap-[40px] px-4">
+                <div className="relative w-full flex flex-row items-center border-b-[#062147] border-b-[1px]">
+                  <input
+                    id="searchbar"
+                    type="text"
+                    className="w-full md:font-semibold font-jakarta outline-none placeholder:text-[#062147] border-transparent focus:border-transparent focus:ring-0 bg-transparent font-epilogue text-[#062147] text-[20px] leading-[30px] "
+                    placeholder="Buscar proyectos"
+                  />
 
-            <ul className="mb-4 flex flex-col items-start justify-center py-4 px-6 h-fit w-full gap-[50px] text-white mt-[10%] z-100 bg-transparent ">
-              <li className="flex flex-row items-center justify-start gap-2">
-                <span className="text-[13px] text-white border-[1px] border-white flex items-center justify-center">
-                  <PlusIcon />
-                </span>
-                <p className="text-white text-[23px] font-bold">$342.90 USD</p>
-              </li>
-              <li className="flex flex-row gap-2 items-center justify-between w-full">
-                <div className="flex flex-row items-center justify-start gap-2">
-                  <span>
-                    <Icon imgUrl={Theme_dark_icon} />
+                  <span className="text-[20px] text-[#062147]">
+                    <SearchIcon />
                   </span>
-                  <p className="text-[1.25em] leading-[1em]"> Modo oscuro</p>
                 </div>
-                <div className="flex items-center justify-center">
-                  <label class="relative inline-flex items-center cursor-pointer">
-                    <input
-                      checked
-                      type="checkbox"
-                      value=""
-                      class="sr-only peer"
-                    />
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#18A5FF]"></div>
-                  </label>
-                </div>
-              </li>
-              {mobileDrawerlinks.map((item) => (
-                <li
-                  key={item.name}
-                  className="text-normal text-[1.25em] leading-[1em] flex flex-row gap-2 items-center justify-start w-full"
-                >
-                  <span className="flex items-center justify-center">
-                    <img src={item.imgUrl} alt="item icon" />
-                  </span>
-                  {item.name}
-                </li>
-              ))}
-              <li className="flex justify-center items-center w-full gap-2">
-                <span>
-                  <img src={Logout_icon_dark} alt="" />
-                </span>
-                <a
-                  href=""
-                  className="font-semibold text-[1.2em] text-[#18A5FF] hover:underline capitalize"
-                >
-                  Cerrar sesión
-                </a>
-              </li>
-
-              <div className="flex flex-col items-center justify-center w-full h-fit px-2">
-                <div className="flex flex-row items-center justify-between w-full">
-                  <a href="">
-                    <img
-                      src={Instagram_icon_light}
-                      alt="Instagram account icon"
-                      className="h-[20px] w-[20px] moonIcon"
-                    />
-                  </a>
-                  <a href="">
-                    <img
-                      src={Twitter_icon_light}
-                      alt="Twitter account icon"
-                      className="h-[20px] w-[20px]"
-                    />
-                  </a>
-
-                  <a href="">
-                    <img
-                      src={Facebook_icon_light}
-                      alt="Facebook account icon"
-                      className="h-[20px] w-[13px]"
-                    />
-                  </a>
-
-                  <a href="">
-                    <img
-                      src={Discord_icon_light}
-                      alt="Facebook account icon"
-                      className="h-[20px] w-[20px]"
-                    />
-                  </a>
+                <ConnectKitButton.Custom>
+                  {({
+                    isConnected,
+                    isConnecting,
+                    show,
+                    hide,
+                    address,
+                    ensName,
+                    chain,
+                  }) => {
+                    return (
+                      <>
+                        {isConnected ? (
+                          <div
+                            className="flex flex-row gap-2 text-[#062147] dark:text-white mr-4 cursor-pointer"
+                            onClick={show}
+                          >
+                            <span className="material-symbols-outlined translate-y-0.5">
+                              account_balance_wallet
+                            </span>
+                            <p className="font-sen font-bold text-[18px]">
+                              {wallet?.balance} USDT
+                            </p>
+                          </div>
+                        ) : (
+                          <div
+                            className="flex flex-row items-center justify-start gap-2"
+                            onClick={show}
+                          >
+                            <span className="material-symbols-outlined cursor-pointer text-[#18A5FF] text-[20px]">
+                              account_balance_wallet
+                            </span>
+                            <p className="text-[20px] font-sen text-[#18A5FF]">
+                              Conectar billetera
+                            </p>
+                          </div>
+                        )}
+                      </>
+                    );
+                  }}
+                </ConnectKitButton.Custom>
+                <div className="w-full flex flex-row justify-between items-center px-2">
+                  <div className="flex flex-row gap-2 items-center justify-start">
+                    <span className="material-symbols-outlined cursor-pointer text-[#062147]">
+                      dark_mode
+                    </span>
+                    <p className="text-[20px] font-sen text-[#062147]">
+                      Modo oscuro
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value=""
+                        className="sr-only peer"
+                      />
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-blue-300 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#18A5FF]"></div>
+                    </label>
+                  </div>
                 </div>
               </div>
-            </ul>
-          </motion.div>
+
+              <ul className="px-6 flex flex-col items-start justify-start w-full gap-[40px] text-[#062147]">
+                {navbarLinks.map((item) => (
+                  <li
+                    key={item.title}
+                    className="capitalize font-sen text-normal text-[20px] leading-[1em]"
+                    onClick={item.onClick}
+                  >
+                    <span className="flex flex-row items-start justify-between gap-2">
+                      {item.icon}
+                      {item.title}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-col gap-[40px] items-center justify-center w-full">
+                <div className="flex flex-row justify-center items-center gap-2 text-[#18A5FF] text-[20px]">
+                  <MdLogout />
+                  <p className="text-[20px]">Cerrar sesion</p>
+                </div>
+
+                <div className="flex flex-row items-center justify-between w-full gap-4 mt-auto">
+                  {socialMediaLinks.map(({ src, alt, style }, index) => (
+                    <img
+                      key={`social-media-${index}`}
+                      src={src}
+                      alt={alt}
+                      className={`cursor-pointer ${style}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
         )}
       </nav>
-    </div>
+    </>
   );
 };
 

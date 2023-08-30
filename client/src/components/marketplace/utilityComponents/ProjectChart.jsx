@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
+import DropdownInput from "../DropdownInput";
 
 const ProjectChart = () => {
   const [selectedTimespan, setSelectedTimespan] = useState("1 month");
@@ -41,6 +42,8 @@ const ProjectChart = () => {
     [11, 35],
   ];
 
+  const chartInfoSections = ["Valorización", "ROI"];
+
   const applyOpacity = (hexColor, opacity) => {
     const alpha = Math.round(opacity * 255);
     return `${hexColor}${alpha.toString(16).padStart(2, "0")}`;
@@ -78,37 +81,101 @@ const ProjectChart = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="chart-controls">
-        <select
-          value={selectedTimespan}
-          onChange={(e) => setSelectedTimespan(e.target.value)}
-        >
-          <option value="1 month">1 month</option>
-          <option value="3 months">3 months</option>
-          <option value="6 months">6 months</option>
-          <option value="1 year">1 year</option>
-          <option value="all">All results</option>
-        </select>
+    <div className="container md:mt-5">
+      <div className="w-full md:flex hidden chart-controls flex-row items-center justify-between mb-5">
+        <DropdownInput
+          options={chartInfoSections}
+          style="text-black text-[20px] font-jakarta"
+          arrowStyle="text-black"
+          switchTab={() => {}}
+        />
 
-        <select
-          value={selectedValueType}
-          onChange={(e) => setSelectedValueType(e.target.value)}
+        <div className="flex flex-row gap-14 items-center pr-4">
+          <p
+            id="1 month"
+            onClick={(e) => setSelectedTimespan(e.target.value)}
+            className="cursor-pointer text-[#18A5FF] font-sen text-[20px]"
+          >
+            1m
+          </p>
+          <p
+            id="3 months"
+            onClick={(e) => setSelectedTimespan(e.target.value)}
+            className="cursor-pointer font-sen text-[20px] hover:opacity-50 hover:text-[#18A5FF]"
+          >
+            3m
+          </p>
+          <p
+            id="6 months"
+            onClick={(e) => setSelectedTimespan(e.target.value)}
+            className="cursor-pointer font-sen text-[20px] hover:opacity-50 hover:text-[#18A5FF]"
+          >
+            6m
+          </p>
+          <p
+            id="1 year"
+            onClick={(e) => setSelectedTimespan(e.target.value)}
+            className="cursor-pointer font-sen text-[20px] hover:opacity-50 hover:text-[#18A5FF]"
+          >
+            1y
+          </p>
+          <p
+            id="all"
+            onClick={(e) => setSelectedTimespan(e.target.value)}
+            className="cursor-pointer font-sen text-[20px] hover:opacity-50 hover:text-[#18A5FF]"
+          >
+            Todos
+          </p>
+        </div>
+      </div>
+
+      <div className="flex md:hidden flex-row gap-14 items-center justify-end pr-4">
+        <p
+          id="1 month"
+          onClick={(e) => setSelectedTimespan(e.target.value)}
+          className="cursor-pointer text-[#18A5FF] font-sen text-[20px]"
         >
-          <option value="valorization">Valorization</option>
-          <option value="ROI">Return on Investment</option>
-          {/* ...other value types */}
-        </select>
+          1m
+        </p>
+        <p
+          id="3 months"
+          onClick={(e) => setSelectedTimespan(e.target.value)}
+          className="cursor-pointer font-sen text-[20px] hover:opacity-50 hover:text-[#18A5FF]"
+        >
+          3m
+        </p>
+        <p
+          id="6 months"
+          onClick={(e) => setSelectedTimespan(e.target.value)}
+          className="cursor-pointer font-sen text-[20px] hover:opacity-50 hover:text-[#18A5FF]"
+        >
+          6m
+        </p>
+        <p
+          id="1 year"
+          onClick={(e) => setSelectedTimespan(e.target.value)}
+          className="cursor-pointer font-sen text-[20px] hover:opacity-50 hover:text-[#18A5FF]"
+        >
+          1y
+        </p>
+        <p
+          id="all"
+          onClick={(e) => setSelectedTimespan(e.target.value)}
+          className="cursor-pointer font-sen text-[20px] hover:opacity-50 hover:text-[#18A5FF]"
+        >
+          Todos
+        </p>
       </div>
 
       <Chart
-        width={"700px"}
+        width={"100vw"}
         height={"410px"}
         chartType="LineChart"
         loader={<div>Loading Chart</div>}
         data={LineData}
         options={LineChartOptions}
         rootProps={{ "data-testid": "2" }}
+        className="md:-translate-x-[150px] -translate-x-[40px] w-full"
       />
     </div>
   );

@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { Throu_l, Throu_l_footer, throu } from "../../assets";
 import Scrollbar from "../landingPage/utility_components/Scrollbar";
 
-const Terms = ({ handleSection }) => {
+const Terms = ({ handleSection, previousSection }) => {
   useEffect(() => {
     document.getElementById("Terms-text").style.overflow = "auto";
   }, []);
 
   return (
-    <div className="w-full h-full bg-white pt-20 md:pt-0 overflow-hidden">
-      <div className="container flex flex-col items-start justify-center gap-4 w-full h-full p-8">
+    <div className="md:min-w-[750px] md:w-[80vw] md:max-w-[950px] md:h-[550px] w-screen h-screen bg-white pt-20 md:pt-0 overflow-hidden">
+      <div className="md:container flex flex-col items-start justify-center gap-4 w-full h-full p-8">
         <div className="flex flex-col items-start justify-start gap-4">
           <img src={Throu_l} alt="" className="w-[150px] h-[40px]" />
           <p className=" font-sen md:text-[22px] text-[18px] font-semibold text-[#B5B5B5]">
@@ -73,7 +73,7 @@ const Terms = ({ handleSection }) => {
           <button
             type="button"
             className="w-[400px] text-[16px] bg-[#062147] py-4 text-white"
-            onClick={() => handleSection(3)}
+            onClick={() => handleSection(previousSection)}
           >
             {" "}
             Continuar{" "}

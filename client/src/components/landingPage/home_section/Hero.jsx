@@ -1,18 +1,20 @@
 import React from "react";
 import { CustomButton } from "../index";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   const handleExplore = () => {};
 
   return (
-    <div className="landingPage__bg w-full h-screen pt-[15vh] md:pt-[10vh] object-contain overflow-hidden">
+    <div className="landingPage__bg w-full h-screen pt-[15vh] md:pt-[10vh] object-contain overflow-hidden relative">
       <div className="flex flex-wrap flex-col gap-2 xl:gap-0 md:w-full h-full text-[#062147] justify-center md:justify-start items-start md:mt-[7%] px-[6%] md:pt-0 md:relative">
-        <h1 className="font-normal text-[30px] md:text-[40px] xl:text-[45px] text-left leading-[40px] md:leading-[calc(100%+15px)] md:w-[65%] lg:w-[80%] xl:w-[70%] md:mb-[2%]">
+        <h1 className="font-normal text-[30px] md:text-[40px] xl:text-[45px] text-left leading-[40px] md:leading-[calc(100%+15px)] md:w-[90%] lg:w-[80%] xl:w-[800px] md:mb-[2%]">
           Invierte en propiedad raíz a través de la tecnología blockchain
         </h1>
 
         <div className="flex flex-1 flex-col md:flex-none items-start justify-between md:justify-center w-full gap-[2rem]">
-          <h3 className="md:w-[40%] lg:w-[45%] xl:w-[30%] w-[70vw] text-[18px] md:text-[20px] md:leading-[25px] leading-[20px] font-[400px] font-jakarta">
+          <h3 className="md:w-[55%] lg:w-[45%] xl:w-[30%] w-[70vw] text-[18px] md:text-[20px] md:leading-[25px] leading-[20px] font-[400px] font-jakarta">
             Vive el futuro de la inversión inmobiliaria con THROU, maximiza tu
             portafolio y obtén mejores rendimientos.
           </h3>
@@ -20,22 +22,23 @@ const Hero = () => {
             <CustomButton
               styles="border-2 border-[#062147] px-12 py-[10px] flex items-center justify-center text-white hidden md:block hover:text-white bg-[#062147] hover:bg-[#18A5FF] hover:border-[#18A5FF] transition ease transform duration-300 text-[18px]"
               title="Explorar"
-              handleClick={handleExplore}
+              handleClick={() => navigate("/marketplace")}
             />
             <CustomButton
               styles="px-16 py-4 flex items-center justify-center w-full h-16 text-white bg-[#062147] md:hidden text-[24px] transition ease transform duration-300"
               title="Invertir"
-              handleClick={handleExplore}
+              handleClick={() => navigate("/marketplace")}
             />
-            <a
-              href=""
-              className="text-[#062147] text-[20px] md:text-[18px] md:border-2 border-transparent hover:underline hover:text-[#18A5FF] md:font-semibold transition ease transform duration-300"
+            <p
+              onClick={() => navigate("/aprende")}
+              className="text-[#062147] text-[20px] md:text-[18px] md:border-2 border-transparent hover:underline hover:text-[#18A5FF] md:font-semibold transition ease transform duration-300 cursor-pointer"
             >
               Conocer más
-            </a>
+            </p>
           </div>
         </div>
       </div>
+      <div className="bg-gradient-to-t from-[#F7FAFF] to-transparent h-[100px] absolute bottom-0 w-full md:block hidden" />
     </div>
   );
 };

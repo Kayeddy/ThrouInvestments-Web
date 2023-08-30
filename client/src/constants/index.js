@@ -132,37 +132,32 @@ export const contributors = [
   {
     name: "AirBnb",
     image: AirBnb,
-    styles:
-      "md:h-[35px] md:w-[140px] xl:h-[40px] xl:w-[190px] h-[20px] w-[95px] grayscale",
+    styles: "w-full h-full object-contain grayscale",
   },
   {
     name: "Binance",
     image: Binance,
-    styles:
-      "md:h-[60px] md:w-[120px] xl:h-[80px] xl:w-[160px] h-[55px] w-[90px] grayscale",
+    styles: "w-full h-full object-contain grayscale",
   },
   {
     name: "SuperIntendence",
     image: SuperIntendence,
-    styles:
-      "md:h-[80px] md:w-[140px] xl:h-[110px] xl:w-[170px] h-[15px] w-[75px] grayscale",
+    styles: "w-full h-full object-contain grayscale",
   },
   {
     name: "Canvas",
     image: Canvas,
-    styles: "lg:h-[40px] lg:w-[130px] h-[20px] w-[65px]",
+    styles: "w-full h-full object-contain grayscale",
   },
   {
     name: "Nomad",
     image: Nomad,
-    styles:
-      "md:h-[60px] md:w-[140px] xl:h-[100px] xl:w-[271px] h-[15px] w-[135.5px] grayscale",
+    styles: "w-full h-full object-fit grayscale",
   },
   {
     name: "Vicaria",
     image: Vicaria,
-    styles:
-      "md:h-[60px] md:w-[140px] xl:h-[100px] xl:w-[300px] h-[15px] w-[135.5px] grayscale",
+    styles: "w-full h-full object-fit grayscale",
   },
 ];
 

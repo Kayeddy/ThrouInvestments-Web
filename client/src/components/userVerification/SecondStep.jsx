@@ -1,28 +1,29 @@
 import React from "react";
 
-import useStore from "../../context";
 import { EmailHandler } from "../../api/server";
 import { CustomButton } from "../../components/marketplace";
+import useUserStore from "../../context/useUserStore";
+import useAuthStore from "../../context/useAuthStore";
 
 const SecondStep = () => {
-  const { userProfile, accessToken } = useStore();
+  const { userProfile } = useUserStore();
+  const { accessToken } = useAuthStore();
   const { sendEmail } = EmailHandler();
 
   const handleSmsDelivery = () => {};
 
   const handleEmailDelivery = async () => {
     let response = null;
+    const email = {
+      to: userProfile.email,
+      subject: "Verificación de cuenta",
+      body: "Hello Edward, please verify your account",
+    };
+    console.log(accessToken);
+
+    console.log(email);
     try {
-      response = await sendEmail(
-        {
-          data: {
-            to: userProfile.email,
-            subject: "Verificación de cuenta",
-            body: "Hello Edward, please verify your account",
-          },
-        },
-        accessToken
-      );
+      response = await sendEmail(email, accessToken);
     } catch (error) {
       console.log("Error sending email:", error);
     }

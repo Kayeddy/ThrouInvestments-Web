@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&display=swap");
+@import "material-symbols";
 
 @tailwind base;
 @tailwind components;
@@ -102,12 +104,50 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   backdrop-filter: blur(5px);
 }
 
+.notification-modal-overlay {
+  position: fixed; /* Positioning relative to the viewport */
+  top: 0; /* From top edge */
+  left: 0; /* From left edge */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Black background with 50% transparency */
+  backdrop-filter: blur(5px); /* Blur effect */
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  z-index: 1000; /* High z-index to ensure it sits on top of other content */
+}
+
+.notification-modal {
+  position: relative; /* Positioning relative to the overlay */
+  width: fit-content; /* Use 80% of the overlay width, or whatever suits your design */
+  height: fit-content;
+  max-width: fit-content; /* Max width of 500px, or whatever suits your design */
+  /* padding: 20px; /* Some padding */
+  background-color: #fff; /* White background */ /* Rounded corners */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* A little shadow for depth */
+  z-index: 1001; /* Slightly higher z-index so it sits on top of the overlay */
+  overflow: auto; /* Add a scrollbar if the content overflows */
+}
+
 .landingPage__bg {
   background: url("./assets/LandingBg2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
   background-position: center;
+}
+
+.customCarousel {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+  gap: 4px;
 }
 
 /* Hide the default scrollbar */
@@ -137,9 +177,29 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.customCarouselScroll::-webkit-scrollbar {
+  opacity: 0;
+  height: 5px;
+}
+
+.customCarouselScroll::-webkit-scrollbar-track {
+  background-color: #e2e8f0 !important;
+  border-radius: 6px !important;
+}
+
+.customCarouselScroll::-webkit-scrollbar-thumb {
+  background-color: #062147 !important;
+  border-radius: 6px !important;
+  max-height: 40px !important;
+}
+
+.customCarouselScroll::-webkit-scrollbar-thumb:hover {
+  background-color: #718096 !important;
+}
+
 @media only screen {
   .overlay {
-    overflow-y: none;
+    overflow-y: scroll;
     justify-content: center;
     align-items: flex-start;
     padding: 40px 0px;
@@ -149,13 +209,43 @@ input::-webkit-inner-spin-button {
   }
 }
 
-@media only screen and(min-width: 1281px) {
+@media only screen and (min-width: 1281px) {
   .overlay {
     justify-content: center;
     align-items: center;
+    overflow-y: none;
   }
 }
 
+@media only screen and (min-width: 280px) {
+  .landingPage__bg {
+    background-position-x: 42%;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .landingPage__bg {
+    background-position-x: 58%;
+  }
+}
+
+@media only screen and (min-width: 375px) {
+  .landingPage__bg {
+    background-position-x: 58%;
+  }
+}
+
+@media only screen and (min-width: 376px) and (max-width: 768px) {
+  .landingPage__bg {
+    background-position-x: 62%;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 820px) {
+  .landingPage__bg {
+    background-position-x: 57%;
+  }
+}
 /* Container styles */
 
 .app__container {
@@ -183,4 +273,16 @@ input::-webkit-inner-spin-button {
   .app_wrapper {
     padding: 4rem 1rem 2rem;
   }
+}
+
+/* Input custom placeholder animation */
+.placeholder::placeholder {
+  position: absolute;
+  pointer-events: none;
+  transition: 0.3s ease all;
+}
+
+.placeholder-active::placeholder {
+  transform: translateY(-20px);
+  font-size: 0.75em;
 }

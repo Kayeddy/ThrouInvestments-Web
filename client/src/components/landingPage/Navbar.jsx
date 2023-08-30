@@ -12,18 +12,37 @@ import {
 } from "../../assets";
 
 import { CustomButton, Overlay } from "./index";
-import useStore from "../../context";
+import useUserStore from "../../context/useUserStore";
+import useInAppNotificationStore from "../../context/useInAppNotificationStore";
 
-const Navbar = ({ blur = false, handleRegistrationModal }) => {
+const Navbar = ({ blur, handleRegistrationModal, registrationModalState }) => {
   const navigate = useNavigate();
+  const openModal = useInAppNotificationStore((state) => state.openModal);
+
   const [toggleDrawer, setToggleDrawer] = useState(false);
 
-  const { userProfile } = useStore();
+  const { userProfile } = useUserStore();
   const socialMediaLinks = [
-    { src: Instagram_mobile, alt: "Instagram account icon" },
-    { src: Twitter_mobile, alt: "Twitter account icon" },
-    { src: Facebook_mobile, alt: "Facebook account icon" },
-    { src: Discord_mobile, alt: "Discord account icon" },
+    {
+      src: Instagram_mobile,
+      alt: "Instagram account icon",
+      style: "w-[20px] h-[20px]",
+    },
+    {
+      src: Twitter_mobile,
+      alt: "Twitter account icon",
+      style: "w-[20px] h-[20px]",
+    },
+    {
+      src: Facebook_mobile,
+      alt: "Facebook account icon",
+      style: "w-[11px] h-[20px]",
+    },
+    {
+      src: Discord_mobile,
+      alt: "Discord account icon",
+      style: "w-[20px] h-[20px]",
+    },
   ];
 
   const navbarLinks = [
@@ -86,12 +105,13 @@ const Navbar = ({ blur = false, handleRegistrationModal }) => {
     };
   }, []);
 
-  const buttonStyles = `border-2 border-[#062147] w-[104px] ${
+  const buttonStyles = `border-2 border-[#062147] ${
     blur ? "py-[5px]" : "py-[10px] "
   } flex items-center justify-center text-white hidden md:block hover:text-white bg-[#062147] hover:bg-[#18A5FF] hover:border-[#18A5FF] text-[18px] transition ease transform duration-300`;
 
   return (
     <>
+      {/* Desktop navbar */}
       <nav
         className={`w-full flex flex-row justify-between items-center py-[10px] px-[6%] bg-white font-sen  ${
           blur
@@ -99,14 +119,17 @@ const Navbar = ({ blur = false, handleRegistrationModal }) => {
             : "bg-opacity-0 h-[90px] "
         }  fixed top-0 transition-all ease-in-out delay-50 hidden md:flex`}
       >
-        <div className="flex justify-center items-center">
+        <div
+          className="flex justify-center items-center cursor-pointer"
+          onClick={() => navigate("/")}
+        >
           <img
             src={blur ? Throu_sm : Throu_l}
             alt="Logo"
-            className={`${
+            className={`object-fill ${
               blur
-                ? "w-[40px] h-[40px]"
-                : "md:w-[90px] lg:w-[120px] xl:w-[160px] md:h-[30px] lg:h-[30px] xl:h-[45px]"
+                ? "w-[45px] h-[45px]"
+                : "md:w-[90px] lg:w-[120px] xl:w-[200px] md:h-[30px] lg:h-[30px] xl:h-[42px]"
             } transition ease-in-out duration-100`}
           />
         </div>
@@ -131,7 +154,9 @@ const Navbar = ({ blur = false, handleRegistrationModal }) => {
           {!userProfile && (
             <p
               className="font-normal text-[18px] text-[#062147] hover:text-[#18A5FF] hover:underline cursor-pointer transition ease transform duration-300"
-              onClick={() => handleRegistrationModal(true)}
+              onClick={() =>
+                openModal("authentication", "generalAuthConnection")
+              }
             >
               Iniciar sesión
             </p>
@@ -145,66 +170,66 @@ const Navbar = ({ blur = false, handleRegistrationModal }) => {
         </div>
       </nav>
 
-      {/*Small screens navigation */}
+      {/*Mobile Navbar*/}
       <nav
-        className={`w-full h-[90px] flex flex-row justify-between items-center pt-[10px] pb-[10px] bg-white ${
-          blur
-            ? "bg-opacity-50 backdrop-filter backdrop-blur-lg"
-            : "bg-opacity-0 "
-        }  fixed top-0 transition-all ease-in-out delay-50 block md:hidden z-10`}
+        className={`w-full h-[90px] fixed top-0 transition-all ease-in-out delay-50 md:hidden z-10`}
       >
         <div
-          className="w-[80px] h-[80px] rounded-[10px] bg-transparent flex justify-center items-center cursor-pointer"
-          onClick={() => {
-            navigate("/");
-          }}
+          className={`w-full h-full flex flex-row justify-between items-center pt-[10px] pb-[10px] backdrop-blur-[10px] bg-opacity-50 z-20 ${
+            !blur ? "bg-transparent" : "bg-white"
+          }`}
         >
-          <img
-            src={Throu_sm}
-            alt="Small Throu icon"
-            className="w-[60%] h-[60%] object-contain"
-          />
+          <div
+            className="w-[80px] h-[80px] rounded-[10px] bg-transparent flex justify-center items-center cursor-pointer"
+            onClick={() => {
+              handleRegistrationModal(false);
+              navigate("/");
+            }}
+          >
+            <img
+              src={Throu_sm}
+              alt="Small Throu icon"
+              className="w-[60%] h-[60%] object-contain"
+            />
+          </div>
+
+          <button
+            type="button"
+            className="text-[30px] text-[#062147] mr-[5%] object-contain cursor-pointer z-10"
+            onClick={handleToggleDrawer}
+            ref={navigationBarRef}
+          >
+            <div
+              className={`h-1 w-[33px] my-1 rounded-full bg-[#062147] transition ease transform duration-300 ${
+                toggleDrawer && "rotate-45 translate-y-2 translate-x-1"
+              }`}
+            />
+
+            <div
+              className={`ml-[12px] h-1 w-[33px] my-1 rounded-full bg-[#062147] transition ease transform duration-300 ${
+                toggleDrawer
+                  ? "-rotate-45 -translate-y-0 -translate-x-2"
+                  : "group-hover:opacity-100"
+              }`}
+            />
+          </button>
         </div>
 
-        <button
-          type="button"
-          className="text-[30px] text-[#062147] mr-[5%] object-contain cursor-pointer z-10"
-          onClick={handleToggleDrawer}
-          ref={navigationBarRef}
-        >
-          <div
-            className={`h-1 w-[33px] my-1 rounded-full bg-[#062147] transition ease transform duration-300 ${
-              toggleDrawer && "rotate-45 translate-y-2 translate-x-1"
-            }`}
-          />
-
-          <div
-            className={`ml-[12px] h-1 w-[33px] my-1 rounded-full bg-[#062147] transition ease transform duration-300 ${
-              toggleDrawer
-                ? "-rotate-45 -translate-y-0 -translate-x-2"
-                : "group-hover:opacity-100"
-            }`}
-          />
-        </button>
-
         {toggleDrawer && (
-          <Overlay>
+          <div className="absolute top-[90.1px] flex items-start justify-center w-fit h-fit z-10 font-sen">
             <motion.div
-              className={`flex flex-col items-center justify-between right-0 left-0  py-4 w-[100vw] h-[560px] transition-all duration-200 backdrop-filter  z-10 mt-[48px] backdrop-blur-[10px] bg-opacity-[0.8] ${
-                !blur ? "bg-white/95" : ""
+              className={`flex flex-col items-center gap-12 justify-start py-5 w-[100vw] h-fit transition-all duration-200 backdrop-blur-[10px] bg-opacity-50 ${
+                !blur ? "bg-transparent" : "bg-white"
               }`}
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.01 }}
             >
-              <ul
-                className="mb-4 flex flex-col items-center justify-start w-full gap-[50px] text-[#062147] content-below"
-                style={{ zIndex: 5 }}
-              >
+              <ul className="mb-4 flex flex-col items-center justify-start w-full gap-[50px] text-[#062147]">
                 {navbarLinks.map((item) => (
                   <li
                     key={item.title}
-                    className="capitalize text-normal text-[1.25em] leading-[1em]"
+                    className="capitalize font-sen text-normal text-[20px] leading-[1em]"
                     onClick={item.onClick}
                   >
                     {item.title}
@@ -212,44 +237,46 @@ const Navbar = ({ blur = false, handleRegistrationModal }) => {
                 ))}
                 <li>
                   <p
-                    className="font-semibold text-[1.2em] hover:text-[#18A5FF] hover:underline capitalize"
-                    onClick={() => handleRegistrationModal(true)}
+                    className="font-semibold text-[1.2em] hover:text-[#18A5FF] hover:underline capitalize font-sen"
+                    onClick={() =>
+                      openModal("authentication", "generalAuthConnection")
+                    }
                   >
                     Iniciar sesión
                   </p>
                 </li>
-                <CustomButton
-                  title="Invertir"
-                  handleClick={() => {
-                    navigate("/marketplace");
-                  }}
-                  styles={`bg-[#062147] text-white py-3 mb-3 mt-5 hover:bg-[#18A5FF] w-[90%]`}
-                />
               </ul>
-              <div className="flex flex-col gap-6 items-center justify-center w-full">
-                <div className="flex flex-row justify-around w-full">
-                  <p className="text-[#062147] text-[1em] font-semibold">
+
+              <CustomButton
+                title="Invertir"
+                handleClick={() => {
+                  navigate("/marketplace");
+                }}
+                styles={`bg-[#062147] text-white py-3.5 hover:bg-[#18A5FF] w-[90%]`}
+              />
+
+              <div className="flex flex-col gap-12 items-center justify-center w-[90%]">
+                <div className="flex flex-row justify-between w-full">
+                  <p className="text-[#062147] text-[14px]">
                     {" "}
                     Términos del servicio{" "}
                   </p>
-                  <p className="text-[#062147] text-[1em] font-semibold">
-                    {" "}
-                    Privacidad{" "}
-                  </p>
+                  <p className="text-[#062147] text-[14px]"> Privacidad </p>
                 </div>
-                <div className="flex flex-row items-center justify-around w-full gap-4 mt-auto">
-                  {socialMediaLinks.map(({ src, alt }, index) => (
+
+                <div className="flex flex-row items-center justify-between w-full gap-4 mt-auto">
+                  {socialMediaLinks.map(({ src, alt, style }, index) => (
                     <img
                       key={`social-media-${index}`}
                       src={src}
                       alt={alt}
-                      className="w-4 h-4 cursor-pointer"
+                      className={`cursor-pointer ${style}`}
                     />
                   ))}
                 </div>
               </div>
             </motion.div>
-          </Overlay>
+          </div>
         )}
       </nav>
     </>

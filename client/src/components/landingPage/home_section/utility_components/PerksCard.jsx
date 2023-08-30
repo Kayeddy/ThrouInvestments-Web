@@ -1,10 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PerksCard = ({ icon, title, description, hoverIcon, imgStyle }) => {
   const [currentIcon, setCurrentIcon] = useState(icon);
   const defaultIcon = useRef(icon);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [cardTapped, setCardTapped] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) {
@@ -40,7 +43,7 @@ const PerksCard = ({ icon, title, description, hoverIcon, imgStyle }) => {
     <div
       className={`${cardTapped ? "h-[320px] bg-[#062147]" : "h-[200px]"} ${
         !isTouchDevice && "nonTouchDevice hover:bg-[#062147]"
-      }  delay-50 group z-10 flex w-[180px] flex-col items-center justify-center gap-2 rounded-lg bg-[#F7FAFF] p-3 shadow-lg transition ease-in-out sm:w-[250px] md:h-[300px] md:min-h-[300px] md:w-[25vw] md:min-w-[300px] md:p-3 md:shadow-none xl:h-[320px]`}
+      }  delay-50 group z-10 flex w-[180px] flex-col items-center justify-center gap-2 rounded-lg bg-[#F7FAFF] p-3 shadow-lg transition ease transform duration-300 sm:w-[250px] md:h-[300px] md:min-h-[300px] md:w-[25vw] md:min-w-[300px] md:p-3 md:shadow-none xl:h-[320px]`}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
       onClick={handleTap}
@@ -89,7 +92,10 @@ const PerksCard = ({ icon, title, description, hoverIcon, imgStyle }) => {
           </p>
         )}
 
-        <p className="cursor-pointer text-[#1486d4] hover:text-[17px] hover:underline ">
+        <p
+          onClick={() => navigate("/aprende")}
+          className="cursor-pointer text-[#1486d4] hover:text-[17px] hover:underline hover:font-bold font-sen transition ease transform duration-300"
+        >
           Explorar
         </p>
       </div>

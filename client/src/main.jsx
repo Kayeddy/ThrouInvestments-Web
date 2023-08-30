@@ -1,7 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 
 import App from "./App";
 import "./main.css";
@@ -9,9 +8,7 @@ import "./main.css";
 const root = createRoot(document.getElementById("root"));
 
 root.render(
-  <ThirdwebProvider desiredChainId={ChainId.Goerli}>
-    <Router>
-      <App />
-    </Router>
-  </ThirdwebProvider>
+  <Router>
+    <App />
+  </Router>
 );

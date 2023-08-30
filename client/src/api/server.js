@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
-import useStore from "../context/index";
+import useAuthStore from "../context/useAuthStore";
+import useUserStore from "../context/useUserStore";
 
 export const userConnection = () => {
-  const { assignAccessToken, addUser: addUserProfile, assignAuth } = useStore();
+  const { addUser: addUserProfile } = useUserStore();
+  const { assignAccessToken, assignAuth } = useAuthStore();
   // Tests ------------------------------------------------------------
   // Test method to connect to backend
+
   const connect = async () => {
     try {
       const response = await fetch(
-        "http://207.246.75.81:3800/api/v1/testthrou",
+        "https://throu.online:3800/api/v1/testthrou",
         {
           method: "GET",
           headers: {
@@ -30,7 +32,7 @@ export const userConnection = () => {
   // Method to add users to database
   const addUser = async (userData) => {
     try {
-      const response = await fetch("http://207.246.75.81:3800/api/v1/user", {
+      const response = await fetch("https://throu.online:3800/api/v1/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,22 +51,44 @@ export const userConnection = () => {
 
   const logIn = async (userData) => {
     try {
-      const response = await fetch("http://207.246.75.81:3800/api/v1/auth", {
+      const response = await fetch("https://throu.online:3800/api/v1/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
       });
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(
+          `Error: ${response.status} ${response.statusText} - ${errorMessage}`
+        );
+      }
+
       const data = await response.json();
-      console.log(data[0]);
-      assignAccessToken(data[0].token.toString());
-      addUserProfile(data[0]);
-      assignAuth({
-        isAuthenticated: true,
-        accessToken: data[0].token.toString(),
-        userId: data[0]._id.toString(),
-      });
+      const userInformation = data[0];
+      console.log(userInformation);
+
+      if (
+        userInformation &&
+        typeof userInformation === "object" &&
+        userInformation.token &&
+        typeof userInformation.token === "string" &&
+        userInformation._id &&
+        typeof userInformation._id === "string"
+      ) {
+        assignAccessToken(userInformation.token);
+        addUserProfile(userInformation);
+        assignAuth({
+          isAuthenticated: true,
+          accessToken: userInformation.token,
+          userId: userInformation._id,
+        });
+        return userInformation;
+      } else {
+        throw new Error("Data validation failed");
+      }
     } catch (error) {
       console.error(error);
       throw error;
@@ -73,34 +97,16 @@ export const userConnection = () => {
 
   // Method to get user data from database, with access token in header
 
-  const getUser = async (token) => {
-    try {
-      const response = await fetch("http://207.246.75.81:3800/api/v1/user", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-acces-token": `${token}`,
-        },
-      });
-      const data = await response.text();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
-
-  // Method to store user wallet address and update it's profiile in the database
-  const updateUserById = async (userId, newData) => {
+  const getUser = async (id, token) => {
     try {
       const response = await fetch(
-        `http://http://207.246.75.81:3800/api/v1/user/${userId}`,
+        `https://throu.online:3800/api/v1/user/${id}`,
         {
-          method: "PUT",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "x-access-token": token,
           },
-          body: JSON.stringify(newData),
         }
       );
       const data = await response.text();
@@ -111,13 +117,134 @@ export const userConnection = () => {
     }
   };
 
-  // Mail ---------------------------------------------------------------------------
+  // Method to update a user's data using the ID
+  const updateUserById = async (userId, newData, token) => {
+    try {
+      const response = await fetch(
+        `https://throu.online:3800/api/v1/user/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+          body: JSON.stringify(newData),
+        }
+      );
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(
+          `Error: ${response.status} ${response.statusText} - ${errorMessage}`
+        );
+      }
+
+      const data = await response.text();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  // Method to generate Sumsub auth token for Sumsub verification
+  const generateSumsubToken = async (userId, token) => {
+    try {
+      const response = await fetch(
+        `https://throu.online:3800/api/v1/user/${userId}/sumsubaccesstoken`,
+        {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            "x-access-token": token,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(
+          `Error: ${response.status} ${response.statusText} - ${errorMessage}`
+        );
+      }
+
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const getUserWalletStateById = async (userId, token) => {
+    try {
+      const response = await fetch(
+        `https://throu.online:3800/api/v1/user/${userId}/iswalletassigned`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+        }
+      );
+
+      console.log();
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(
+          `Error: ${response.status} ${response.statusText} - ${errorMessage}`
+        );
+      }
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  // Method that allows users to update their password
+  const updateUserPassword = async (newPassword, token) => {};
+
+  //File management
+
+  const uploadDocumentFile = async (formData) => {
+    try {
+      const response = await fetch(`https://throu.online:3800/api/v1/file`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(
+          `Error: ${response.status} ${response.statusText} - ${errorMessage}`
+        );
+      }
+
+      const data = await response.text();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const retrieveDocumentFileById = async () => {};
 
   return {
     connect,
     addUser,
     logIn,
     getUser,
+    updateUserById,
+    generateSumsubToken,
+    getUserWalletStateById,
+    uploadDocumentFile,
   };
 };
 
@@ -125,11 +252,11 @@ export const EmailHandler = () => {
   // Method to send an email to a user
   const sendEmail = async (emailData, token) => {
     try {
-      const response = await fetch("http://207.246.75.81:3800/api/v1/mail/", {
+      const response = await fetch("https://throu.online:3800/api/v1/mail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "x-access-token": `${token}`,
         },
         body: JSON.stringify(emailData),
       });

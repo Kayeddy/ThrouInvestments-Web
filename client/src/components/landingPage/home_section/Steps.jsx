@@ -15,10 +15,12 @@ import {
 } from "../../../assets";
 
 import { StepsCard } from "./utility_components";
+import { useNavigate } from "react-router-dom";
 
-const Steps = () => {
+const Steps = ({ showRegistrationModal }) => {
+  const navigate = useNavigate();
   return (
-    <div className="flex flex-col w-full h-fit md:h-screen items-center justify-start md:pl-[7%] overflow-hidden">
+    <div className="flex flex-col w-full h-fit md:min-h-screen items-center justify-start md:pl-[7%] overflow-hidden mt-12 md:mt-0">
       <div className="w-full h-full flex-col md:flex hidden items-start justify-start">
         <div className="flex flex-col gap-2 justify-start items-start w-full h-fit md:pl-[10%] relative">
           <p className="text-left text-[#062147] font-bold leading-[50px] text-[40px]">
@@ -36,8 +38,8 @@ const Steps = () => {
           <img src={StepsLine} alt="" />
         </div>
 
-        <div className="relative w-full mt-[30px] lg:mt-0 h-fit flex max-w-[90%] font-jakarta pr-10">
-          <div className="absolute left-0 lg:top-[50px]">
+        <div className="relative w-full flex max-w-[90%] font-jakarta pr-10">
+          <div className="absolute left-0 lg:top-[30px]">
             <StepsCard
               image={AccountStep}
               iconStyle="h-[50px] w-[43px]"
@@ -53,6 +55,7 @@ const Steps = () => {
               style="shadow-blue-custom"
               goTo="Regístrate"
               goToColor="text-[#B5B5B5]"
+              handleReferenceClick={() => showRegistrationModal(true)}
             />
           </div>
 
@@ -72,6 +75,7 @@ const Steps = () => {
               style="shadow-gray-custom"
               goTo="Explorar"
               goToColor="text-[#062147]"
+              handleReferenceClick={() => navigate("/marketplace")}
             />
           </div>
 
@@ -91,6 +95,7 @@ const Steps = () => {
               style="shadow-blue-custom"
               goTo="Comprar tokens"
               goToColor="text-[#18A5FF]"
+              handleReferenceClick={() => navigate("/marketplace")}
             />
           </div>
 
@@ -110,13 +115,14 @@ const Steps = () => {
               style="shadow-purple-custom"
               goTo=" Más información "
               goToColor="text-[#8C06B1]"
+              handleReferenceClick={() => navigate("/aprende")}
             />
           </div>
         </div>
       </div>
 
       {/** Mobile Steps display */}
-      <div className="w-full md:hidden flex flex-col items-start gap-10">
+      <div className="w-full md:hidden flex flex-col items-start gap-10 md:mb-0">
         <div className="flex flex-col justify-start items-start w-full h-fit pl-[7%]">
           <p className="text-left text-[#062147] font-bold leading-[1.5em] text-[2em]">
             Estaremos en cada
@@ -129,7 +135,7 @@ const Steps = () => {
           </p>
         </div>
 
-        <div className="flex carousel w-full h-fit relative py-8 z-10">
+        <div className="flex carousel w-full h-fit relative py-8 pb-16 md:pb-0 z-10 overflow-x-auto">
           <div className="carousel-item flex flex-col justify-start items-center gap-8 pl-1 w-full">
             <div className="flex flex-col justify-center items-center">
               <StepsCard
